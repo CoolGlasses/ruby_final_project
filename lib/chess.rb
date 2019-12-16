@@ -1,6 +1,14 @@
 require "byebug"
 
 class Board #8x8 playing surface, 9x9 if you include Row & Column Labels
+    attr_accessor :board
+    
+    def initialize
+        @board = build_board()
+    end
+
+    def build_board
+    end
 end
 
 class ChessSet
