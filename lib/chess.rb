@@ -10,6 +10,15 @@ class Board #8x8 playing surface, 9x9 if you include Row & Column Labels
     def build_board
         white_set = ChessSet.new("white")
         black_set = ChessSet.new("black")
+
+        finally = Array.new(9) { Array.new(9)}
+        
+        finally[0] = ["a", "b", "c", "d", "e", "f", "g", "h"]
+        
+        8.downto(1).each do |row|
+            finally[row][0] = row.to_s
+        end
+
     end
 end
 
