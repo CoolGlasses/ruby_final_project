@@ -51,9 +51,6 @@ class Player
 
         return color
     end
-
-
-
 end
 
 class Game
@@ -61,6 +58,7 @@ class Game
     def initialize
         @player1 = Player.new
         @player2 = Player.new(@player1.color)
+        @board = Board.new
     end
 
 end
