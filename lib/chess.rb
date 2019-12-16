@@ -69,6 +69,13 @@ class Knight
 end
 
 class Castle
+    attr_reader :num, :color
+    attr_accessor :status
+    def initialize(num, color)
+        @num = num
+        @color = color
+        @status = "free"
+    end
 end
 
 class Rook
