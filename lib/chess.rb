@@ -1,6 +1,6 @@
 require "byebug"
 
-class Board
+class Board #8x8 playing surface, 9x9 if you include Row & Column Labels
 end
 
 class ChessSet
@@ -25,7 +25,22 @@ class Queen
 end
 
 class Player
+    attr_reader :name, :color
+
+    def initialize(color=nil)
+        @name = get_player_name()
+        @color = get_player_color(color)
+    end
+    
+
+
 end
 
 class Game
+
+    def initialize
+        @player1 = Player.new
+        @player2 = Player.new(@player1.color)
+    end
+
 end
