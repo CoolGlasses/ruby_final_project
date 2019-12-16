@@ -19,7 +19,7 @@ class ChessSet
 
     def initialize(color)
         @color = color
-        @pieces = get_pieces(@color)
+        @pieces = get_pieces(@color) ##an array of piece instances
     end
 
     def get_pieces(color)
@@ -50,61 +50,67 @@ end
 
 class Pawn
     attr_reader :num, :color
-    attr_accessor :status
+    attr_accessor :status, :location
     def initialize(num, color)
         @num = num
         @color = color
         @status = "free"
+        @location = nil
     end
 end
 
 class Knight
     attr_reader :num, :color
-    attr_accessor :status
+    attr_accessor :status, :location
     def initialize(num, color)
         @num = num
         @color = color
         @status = "free"
+        @location = nil
     end
 end
 
 class Castle
     attr_reader :num, :color
-    attr_accessor :status
+    attr_accessor :status, :location
     def initialize(num, color)
         @num = num
         @color = color
         @status = "free"
+        @location = nil
     end
 end
 
 class Rook
     attr_reader :num, :color
-    attr_accessor :status
+    attr_accessor :status, :location
     def initialize(num, color)
         @num = num
         @color = color
         @status = "free"
+        @location = nil
     end
 end
 
 class King
     attr_reader :num, :color
-    attr_accessor :status
+    attr_accessor :status, :location
     def initialize(num, color)
         @num = num
         @color = color
         @status = "free"
+        @location = nil
     end
 end
 
 class Queen
     attr_reader :num, :color
-    attr_accessor :status
+    attr_accessor :status, :location
     def initialize(num, color)
         @num = num
         @color = color
         @status = "free"
+        @location = nil
     end
 end
 
