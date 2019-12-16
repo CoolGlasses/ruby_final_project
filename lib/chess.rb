@@ -79,12 +79,33 @@ class Castle
 end
 
 class Rook
+    attr_reader :num, :color
+    attr_accessor :status
+    def initialize(num, color)
+        @num = num
+        @color = color
+        @status = "free"
+    end
 end
 
 class King
+    attr_reader :num, :color
+    attr_accessor :status
+    def initialize(num, color)
+        @num = num
+        @color = color
+        @status = "free"
+    end
 end
 
 class Queen
+    attr_reader :num, :color
+    attr_accessor :status
+    def initialize(num, color)
+        @num = num
+        @color = color
+        @status = "free"
+    end
 end
 
 class Player
