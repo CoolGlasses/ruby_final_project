@@ -8,10 +8,19 @@ class Board #8x8 playing surface, 9x9 if you include Row & Column Labels
     end
 
     def build_board
+        white_set = ChessSet.new("white")
+        black_set = ChessSet.new("black")
     end
 end
 
 class ChessSet
+    attr_reader :color
+    attr_accessor :pieces
+    
+    def initialize(color)
+        @color = color
+        @pieces = get_pieces()
+    end
 end
 
 class Pawn
