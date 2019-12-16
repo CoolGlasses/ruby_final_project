@@ -59,6 +59,13 @@ class Pawn
 end
 
 class Knight
+    attr_reader :num, :color
+    attr_accessor :status
+    def initialize(num, color)
+        @num = num
+        @color = color
+        @status = "free"
+    end
 end
 
 class Castle
