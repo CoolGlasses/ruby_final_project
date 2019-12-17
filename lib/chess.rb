@@ -25,7 +25,26 @@ class Board #8x8 playing surface, 9x9 if you include Row & Column Labels
     def place_pieces(set)
         set.pieces.each do |piece|
             location = piece.location.split("")
-            @board[location[0]][location[1]] = piece
+            col = 0
+            case location[0]
+                when "a"
+                    col = 0
+                when "b"
+                    col = 1
+                when "c"
+                    col = 2
+                when "d"
+                    col = 3
+                when "e"
+                    col = 4
+                when "f"
+                    col = 5
+                when "g"
+                    col = 6
+                when "h"
+                    col = 7
+            end 
+            @board[[location[1][col]] = piece
         end
     end
 
