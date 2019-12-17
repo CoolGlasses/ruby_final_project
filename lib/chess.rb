@@ -335,14 +335,20 @@ class Game
             piece_to_move.location = destination
 
             if turn == @player1
-                if check_check(@player2) == true
+                if check_check(@player2) == true && checkmate_check(@player2) == true
+                    p "Checkmate! #{player_name} wins!"
+                    turn = @player2
+                elsif check_check(@player2) == true
                     p "Check!"
                     turn = @player2
                 else
                     turn = @player2
                 end
             else
-                if check_check(@player1) == true
+                if check_check(@player1) == true && checkmate_check(@player1) == true
+                    p "Checkmate! #{player_name} wins!"
+                    turn = @player1
+                elsif check_check(@player1) == true
                     p "Check!"
                     turn = @player1
                 else
