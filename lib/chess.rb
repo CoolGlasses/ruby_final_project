@@ -8,8 +8,7 @@ class Board #8x8 playing surface, 9x9 if you include Row & Column Labels
     end
 
     def build_board
-        white_set = ChessSet.new("white")
-        black_set = ChessSet.new("black")
+
 
         finally = Array.new(9) { Array.new(9, " ")}
         
@@ -20,6 +19,12 @@ class Board #8x8 playing surface, 9x9 if you include Row & Column Labels
         end
 
     end
+
+    def place_pieces(board)
+        white_set = ChessSet.new("white", board)
+        black_set = ChessSet.new("black", board)
+    end
+
 end
 
 class ChessSet
@@ -90,7 +95,7 @@ class Castle
     end
 end
 
-class Rook
+class Bishop
     attr_reader :num, :color
     attr_accessor :status, :location
     def initialize(num, color)
@@ -108,8 +113,18 @@ class King
         @num = num
         @color = color
         @status = "free"
-        @location = nil
+        @location = place_king(@color)
+
     end
+
+    def place_king(color)
+        if color == "white"
+            return "e1"
+        else
+            return "e8"
+        end
+    end
+
 end
 
 class Queen
@@ -171,5 +186,7 @@ class Game
         finally = [origin, destination]
         return finally
     end
+
+
 
 end
