@@ -160,4 +160,16 @@ class Game
         @board = Board.new
     end
 
+    def get_move(player)
+        p "#{player}, it's your turn.  What would you like to do?"
+        p "Remember!  Type the starting coordinate first(Origin), then the finishing coordinate(Destination).  (i.e. b1, c3)"
+        p "Origin: "
+        origin = gets.chomp
+        p "Destination: "
+        destination = gets.chomp
+
+        finally = [origin, destination]
+        return finally
+    end
+
 end
