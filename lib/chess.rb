@@ -5,8 +5,8 @@ class Board #8x8 playing surface, 9x9 if you include Row & Column Labels
     
     def initialize
         @board = build_board()
-        @white_set = ChessSet.new("white", @board)
-        @black_set = ChessSet.new("black", board)
+        @white_set = ChessSet.new("white")
+        @black_set = ChessSet.new("black")
     end
 
     def build_board
@@ -19,6 +19,14 @@ class Board #8x8 playing surface, 9x9 if you include Row & Column Labels
         end
 
     end
+
+    def place_pieces(set)
+        set.pieces.each do |piece|
+            location = piece.location.split("")
+            @board[location[0]][location[1]] = piece
+        end
+    end
+
 
 end
 
