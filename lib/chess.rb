@@ -314,39 +314,41 @@ class Game
     end
 
     def play(turn=nil)
-        if turn == nil
-            if @player1.color == "white"
-                turn = @player1
+        game_over = false
+        while !game_over
+            if turn == nil
+                if @player1.color == "white"
+                    turn = @player1
+                else
+                    turn = @player2
+                end
+            end
+
+            player_name = turn.name
+
+            p "Okay #{player_name}, you're up!"
+            move = get_move(turn)
+            origin = location_converter(move[0])
+            destination = location_converter(move[1])
+            piece_to_move = @board[origin[0]][origin[1]]
+            piece_to_move.location = destination
+
+            if turn == @player1
+                if check_check(@player2) == true
+                    p "Check!"
+                    turn = @player2
+                else
+                    turn = @player2
+                end
             else
-                turn = @player2
+                if check_check(@player1) == true
+                    p "Check!"
+                    turn = @player1
+                else
+                    turn = @player1
+                end
             end
         end
-
-        player_name = turn.name
-
-        p "Okay #{player_name}, you're up!"
-        move = get_move(turn)
-        origin = location_converter(move[0])
-        destination = location_converter(move[1])
-        piece_to_move = @board[origin[0]][origin[1]]
-        piece_to_move.location = destination
-
-        if turn == @player1
-            if check_check(@player2) == true
-                p "Check!"
-                turn = @player2
-            else
-                turn = @player2
-            end
-        else
-            if check_check(@player1) == true
-                p "Check!"
-                turn = @player1
-            else
-                turn = @player1
-            end
-        end
-
     end
         
 
