@@ -1,15 +1,15 @@
 require "byebug"
 
 class Board #8x8 playing surface, 9x9 if you include Row & Column Labels
-    attr_accessor :board
+    attr_accessor :board, :white_set, :black_set
     
     def initialize
         @board = build_board()
+        @white_set = ChessSet.new("white", @board)
+        @black_set = ChessSet.new("black", board)
     end
 
     def build_board
-
-
         finally = Array.new(9) { Array.new(9, " ")}
         
         finally[0] = [" ", "a", "b", "c", "d", "e", "f", "g", "h"]
@@ -18,11 +18,6 @@ class Board #8x8 playing surface, 9x9 if you include Row & Column Labels
             finally[row][0] = row.to_s
         end
 
-    end
-
-    def place_pieces(board)
-        white_set = ChessSet.new("white", board)
-        black_set = ChessSet.new("black", board)
     end
 
 end
