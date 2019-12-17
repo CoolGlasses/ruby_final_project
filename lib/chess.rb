@@ -7,6 +7,8 @@ class Board #8x8 playing surface, 9x9 if you include Row & Column Labels
         @board = build_board()
         @white_set = ChessSet.new("white")
         @black_set = ChessSet.new("black")
+        place_pieces(@white_set)
+        place_pieces(@black_set)
     end
 
     def build_board
@@ -72,8 +74,38 @@ class Pawn
         @num = num
         @color = color
         @status = "free"
-        @location = nil
+        @location = set_location(@num, @color)
     end
+
+    def set_location(num, color)
+        row = 0
+        if color == "black"
+            row = 7
+        else
+            row = 2
+        end
+
+        col = 0
+        case num
+            when 1
+                col = "a"
+            when 2
+                col = "b"
+            when 3
+                col = "c"
+            when 4
+                col = "d"
+            when 5
+                col = "e"
+            when 6
+                col = "f"
+            when 7
+                col = "g"
+            when 8
+                col = "h"
+        end
+
+        return "#{col}#{row}"
 end
 
 class Knight
