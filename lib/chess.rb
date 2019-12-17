@@ -227,7 +227,15 @@ class Queen
         @num = num
         @color = color
         @status = "free"
-        @location = nil
+        @location = place_queen(@color)
+    end
+
+    def place_queen(color)
+        if color == "white"
+            return "d1"
+        else
+            return "d8"
+        end
     end
 end
 
