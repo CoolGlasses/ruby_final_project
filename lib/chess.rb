@@ -176,7 +176,26 @@ class Bishop
         @num = num
         @color = color
         @status = "free"
-        @location = nil
+        @location = set_location(@num, @color)
+    end
+
+    def set_location(num, color)
+        row = 0
+        if color == "black"
+            row = 8
+        else
+            row = 1
+        end
+
+        col = 0
+        case num
+            when 1
+                col = "c"
+            when 2
+                col = "f"
+        end
+
+        return "#{col}#{row}"
     end
 end
 
