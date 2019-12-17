@@ -260,10 +260,12 @@ end
 
 class Player
     attr_reader :name, :color
+    attr_accessor :in_check
 
     def initialize(color=nil)
         @name = get_player_name()
         @color = get_player_color(color)
+        @in_check = false
     end
 
     def get_player_name
@@ -297,7 +299,7 @@ class Game
 
     def get_move(player)
         p "#{player}, it's your turn.  What would you like to do?"
-        p "Remember!  Type the starting coordinate first(Origin), then the finishing coordinate(Destination).  (i.e. b1, c3)"
+        p "Remember!  Type the starting coordinate first(Origin - ColumnRow), then the finishing coordinate(Destination - ColumnRow).  (i.e. b1, c3)"
         p "Origin: "
         origin = gets.chomp
         p "Destination: "
