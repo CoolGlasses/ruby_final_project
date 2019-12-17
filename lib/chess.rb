@@ -44,7 +44,7 @@ class Board #8x8 playing surface, 9x9 if you include Row & Column Labels
                 when "h"
                     col = 7
             end 
-            @board[[location[1][col]] = piece
+            @board[location[1]][col] = piece
         end
     end
 
@@ -229,7 +229,7 @@ class King
 
     end
 
-    def place_king(color)
+    def set_location(color)
         if color == "white"
             return "e1"
         else
@@ -249,7 +249,7 @@ class Queen
         @location = place_queen(@color)
     end
 
-    def place_queen(color)
+    def set_location(color)
         if color == "white"
             return "d1"
         else
@@ -298,7 +298,8 @@ class Game
     end
 
     def get_move(player)
-        p "#{player}, it's your turn.  What would you like to do?"
+        player_name = player.name
+        p "#{player.name}, it's your turn.  What would you like to do?"
         p "Remember!  Type the starting coordinate first(Origin - ColumnRow), then the finishing coordinate(Destination - ColumnRow).  (i.e. b1, c3)"
         p "Origin: "
         origin = gets.chomp
@@ -308,6 +309,46 @@ class Game
         finally = [origin, destination]
         return finally
     end
+
+    def location_converter(coordinates)
+    end
+
+    def play(turn=nil)
+        if turn == nil
+            if @player1.color == "white"
+                turn = @player1
+            else
+                turn = @player2
+            end
+        end
+
+        player_name = turn.name
+
+        p "Okay #{player_name}, you're up!"
+        move = get_move(turn)
+        origin = location_converter(move[0])
+        destination = location_converter(move[1])
+        piece_to_move = @board[origin[0]][origin[1]]
+        piece_to_move.location = destination
+
+        if turn == @player1
+            if check_check(@player2) == true
+                p "Check!"
+                turn = @player2
+            else
+                turn = @player2
+            end
+        else
+            if check_check(@player1) == true
+                p "Check!"
+                turn = @player1
+            else
+                turn = @player1
+            end
+        end
+
+    end
+        
 
 
 
