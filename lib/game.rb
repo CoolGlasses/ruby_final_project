@@ -1,5 +1,16 @@
-class Game
+require "byebug"
+require "bishop.rb"
+require "board.rb"
+require "castle.rb"
+require "chess.rb"
+require "chessSet.rb"
+require "king.rb"
+require "knight.rb"
+require "pawn.rb"
+require "player.rb"
+require "queen.rb"
 
+class Game
     def initialize
         @player1 = Player.new
         @player2 = Player.new(@player1.color)
@@ -20,6 +31,18 @@ class Game
     end
 
     def location_converter(coordinates)
+    end
+
+    def check_check(player)
+    end
+
+    def checkmate_check(player)
+    end
+
+    def save
+    end
+
+    def move_piece(origin, destination)
     end
 
     def play(turn=nil)

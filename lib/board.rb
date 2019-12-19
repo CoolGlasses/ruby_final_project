@@ -1,3 +1,16 @@
+require "byebug"
+require "bishop.rb"
+require "castle.rb"
+require "chess.rb"
+require "chessSet.rb"
+require "game.rb"
+require "king.rb"
+require "knight.rb"
+require "pawn.rb"
+require "player.rb"
+require "queen.rb"
+
+
 class Board #8x8 playing surface, 9x9 if you include Row & Column Labels
     attr_accessor :board, :white_set, :black_set
     

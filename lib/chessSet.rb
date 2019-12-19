@@ -1,3 +1,15 @@
+require "byebug"
+require "bishop.rb"
+require "board.rb"
+require "castle.rb"
+require "chess.rb"
+require "game.rb"
+require "king.rb"
+require "knight.rb"
+require "pawn.rb"
+require "player.rb"
+require "queen.rb"
+
 class ChessSet
     attr_reader :color
     attr_accessor :pieces
