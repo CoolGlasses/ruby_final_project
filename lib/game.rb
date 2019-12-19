@@ -11,10 +11,16 @@ require "player.rb"
 require "queen.rb"
 
 class Game
+    attr_accessor :board, :white_set, :black_set
+
     def initialize
         @player1 = Player.new
         @player2 = Player.new(@player1.color)
         @board = Board.new
+        @white_set = ChessSet.new("white")
+        @black_set = ChessSet.new("black")
+        @board.place_pieces(@white_set)
+        @board.place_pieces(@black_set)
     end
 
     def get_move(player)

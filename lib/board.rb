@@ -12,14 +12,10 @@ require "queen.rb"
 
 
 class Board #8x8 playing surface, 9x9 if you include Row & Column Labels
-    attr_accessor :board, :white_set, :black_set
+    attr_accessor :board
     
     def initialize
         @board = build_board()
-        @white_set = ChessSet.new("white")
-        @black_set = ChessSet.new("black")
-        place_pieces(@white_set)
-        place_pieces(@black_set)
     end
 
     def build_board
@@ -30,7 +26,6 @@ class Board #8x8 playing surface, 9x9 if you include Row & Column Labels
         8.downto(1).each do |row|
             finally[row][0] = row.to_s
         end
-
     end
 
     def place_pieces(set)
@@ -58,6 +53,4 @@ class Board #8x8 playing surface, 9x9 if you include Row & Column Labels
             @board[location[1]][col] = piece
         end
     end
-
-
 end
