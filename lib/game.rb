@@ -40,9 +40,19 @@ class Game
     end
 
     def check_check(player)
+        if player.in_check == true
+            return true
+        end
+
+        return false
     end
 
     def checkmate_check(player)
+        if player.checkmate == true
+            return true
+        end
+
+        return false
     end
 
     def save
