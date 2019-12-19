@@ -26,7 +26,7 @@ class Game
     def get_move(player)
         player_name = player.name
         p "#{player.name}, it's your turn.  What would you like to do?"
-        p "Remember!  Type the starting coordinate first(Origin - ColumnRow), then the finishing coordinate(Destination - ColumnRow).  (i.e. b1, c3)"
+        p "Remember!  Type the starting coordinate first(Origin - RowColumn), then the finishing coordinate(Destination - RowColumn).  (i.e. 1b, 3c)"
         p "Origin: "
         origin = gets.chomp
         p "Destination: "
@@ -49,6 +49,19 @@ class Game
     end
 
     def move_piece(origin, destination)
+        board = @board.board
+        this_row = origin[0]
+        this_col = origin[1]
+        piece_to_move = board[this_row][this_col]
+
+        if piece_to_move.valid_moves.include?(destination)
+            new_row = destination[0]
+            new_col = destination[1]
+            board[new_row][new_col] = piece_to_move
+            board[this_row][this_col] = " "
+        else
+            p "invalid move"
+        end
     end
 
     def play(turn=nil)
