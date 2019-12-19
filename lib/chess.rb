@@ -88,13 +88,21 @@ end
 
 class Pawn
     attr_reader :num, :color
-    attr_accessor :status, :location, :valid_moves
+    attr_accessor :status, :valid_moves
     def initialize(num, color)
         @num = num
         @color = color
         @status = "free"
         @location = set_location(@num, @color)
         @valid_moves = []
+    end
+
+    def location
+        @location
+    end
+
+    def location=(board_array, destination_array)
+        @location = destination_array.join("")
     end
 
     def set_location(num, color)
@@ -124,7 +132,6 @@ class Pawn
             when 8
                 col = "h"
         end
-
         return "#{col}#{row}"
     end
 
