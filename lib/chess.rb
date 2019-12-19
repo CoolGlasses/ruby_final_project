@@ -88,12 +88,13 @@ end
 
 class Pawn
     attr_reader :num, :color
-    attr_accessor :status, :location
+    attr_accessor :status, :location, :valid_moves
     def initialize(num, color)
         @num = num
         @color = color
         @status = "free"
         @location = set_location(@num, @color)
+        @valid_moves = []
     end
 
     def set_location(num, color)
@@ -126,6 +127,32 @@ class Pawn
 
         return "#{col}#{row}"
     end
+
+    def next_valid_moves(board_array)
+        finally = []
+        location_coordinates = @location.split("")
+        this_col = location_coordinates[0]
+        this_row = location_coordinates[1]
+        
+        if @color == "white"
+            move_one = this_row + 1
+            move_two = this_row + 2
+        else
+            move_one = this_row - 1
+            move_two = this_row - 2
+        end
+        
+        if board_array[this_col][move_one] == " "
+            finally << "#{this_col}#{move_one}"
+        end
+
+        if board_array[this_col][up_two] == " " && (this_row == 7 || this_row == 2)
+            finally << "#{this_col}#{move_two}"
+        end
+
+        return finally
+    end
+
 end
 
 class Knight
