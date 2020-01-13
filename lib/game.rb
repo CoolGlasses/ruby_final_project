@@ -23,7 +23,7 @@ class Game
         @board.place_pieces(@black_set)
     end
 
-    def get_move(player) ##is Row, Column the correct format for cell identification?
+    def get_move(player) 
         player_name = player.name
         p "#{player.name}, it's your turn.  What would you like to do?"
         p "Remember!  Type the starting coordinate first(Origin - RowColumn), then the finishing coordinate(Destination - RowColumn).  (i.e. 1b, 3c)"
@@ -90,12 +90,11 @@ class Game
             p "Okay #{player_name}, you're up!"
             move = get_move(turn)
             move_piece(move[0], move[1])
-            
 
             if turn == @player1
-                if check_check(@player2) == true && checkmate_check(@player2) == true
+                if checkmate_check(@player2) == true
                     p "Checkmate! #{player_name} wins!"
-                    turn = @player2
+                    game_over = true
                 elsif check_check(@player2) == true
                     p "Check!"
                     turn = @player2
@@ -103,9 +102,9 @@ class Game
                     turn = @player2
                 end
             else
-                if check_check(@player1) == true && checkmate_check(@player1) == true
+                if checkmate_check(@player1) == true
                     p "Checkmate! #{player_name} wins!"
-                    turn = @player1
+                    game_over = true
                 elsif check_check(@player1) == true
                     p "Check!"
                     turn = @player1
