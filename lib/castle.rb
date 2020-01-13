@@ -34,21 +34,108 @@ class Castle
         location_coordinates = @location.split("")
         this_col = location_coordinates[1]
         this_row = location_coordinates[0]
+        finally << valid_horizontal_moves_right(board_array, this_row, this_col)
+        finally << valid_horizontal_moves_left(board_array, this_row, this_col)
+        finally << valid_vertical_moves_up(board_array, this_row, this_col)
+        finally << valid_vertical_moves_down(board_array, this_row, this_col)
         
-        (1..9).each do |row|
-            if row == this_row
-                (1..9).each do |col|
-                    if board_array[row][col] == " " || (@color != board_array[row][col].color && (row != 0 || row != nil) && (col != 0 || col != nil))
-                        finally << "#{row}#{col}"
-                    end
-                end
+        return finally
+    end
+
+    def valid_horizontal_moves_right(board_array, this_row, this_col)
+        finally = []
+
+        next_col = this_col + 1
+        done = false    
+        while !done
+            if next_col == 10
+                done = true
             else
-                if board_array[row][this_col] == " " || (@color != board_array[row][this_col].color && (row != 0 || row != nil))
-                        finally << "#{row}#{col}"
+                if board_array[this_row][next_col] == " "
+                    finally << "#{this_row}#{next_col}"
+                    next_col += 1
+                elsif @color != board_array[this_row][next_col].color
+                    done = true
+                    finally << "#{this_row}#{next_col}"
+                else
+                    done = true
                 end
             end
-        end        
+        end
+        
+        return finally
+    end
+
+        def valid_horizontal_moves_left(board_array, this_row, this_col)
+        finally = []
+
+        next_col = this_col - 1
+        done = false    
+        while !done
+            if next_col == 0
+                done = true
+            else
+                if board_array[this_row][next_col] == " "
+                    finally << "#{this_row}#{next_col}"
+                    next_col -= 1
+                elsif @color != board_array[this_row][next_col].color
+                    done = true
+                    finally << "#{this_row}#{next_col}"
+                else
+                    done = true
+                end
+            end
+        end
+        
+        return finally
+    end
+
+    def valid_vertical_moves_up(board_array, this_row, this_col)
+        finally = []
+
+        next_row = this_row + 1
+        done = false
+        while !done
+            if next_row == 10
+                done = true
+            else
+                if board_array[next_row][this_col] == " "
+                    finally << "#{next_row}#{this_col}"
+                    next_row += 1
+                elsif @color != board_array[next_row][this_col].color
+                    done = true
+                    finally << "#{next_row}#{this_col}"
+                else
+                    done = true
+                end
+            end
+        end
 
         return finally
     end
+
+    def valid_vertical_moves_down(board_array, this_row, this_col)
+        finally = []
+
+        next_row = this_row - 1
+        done = false
+        while !done
+            if next_row == 0
+                done = true
+            else
+                if board_array[next_row][this_col] == " "
+                    finally << "#{next_row}#{this_col}"
+                    next_row -= 1
+                elsif @color != board_array[next_row][this_col].color
+                    done = true
+                    finally << "#{next_row}#{this_col}"
+                else
+                    done = true
+                end
+            end
+        end
+
+        return finally
+    end
+
 end
