@@ -36,9 +36,15 @@ class Castle
         this_row = location_coordinates[0]
         
         (1..9).each do |row|
-            (1..9).each do |col|
-                if board_array[row][col] == " " || (@color != board_array[row][col].color && (row != 0 || row != nil) && (col != 0 || col != nil))
-                    finally << "#{row}#{col}"
+            if row == this_row
+                (1..9).each do |col|
+                    if board_array[row][col] == " " || (@color != board_array[row][col].color && (row != 0 || row != nil) && (col != 0 || col != nil))
+                        finally << "#{row}#{col}"
+                    end
+                end
+            else
+                if board_array[row][this_col] == " " || (@color != board_array[row][this_col].color && (row != 0 || row != nil))
+                        finally << "#{row}#{col}"
                 end
             end
         end        
