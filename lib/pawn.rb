@@ -1,6 +1,7 @@
 class Pawn
     attr_reader :num, :color
     attr_accessor :status, :valid_moves
+
     def initialize(num, color)
         @num = num
         @color = color
@@ -44,14 +45,14 @@ class Pawn
             when 8
                 col = "h"
         end
-        return "#{col}#{row}"
+        return "#{row}#{col}"
     end
 
     def next_valid_moves(board_array)
         finally = []
         location_coordinates = @location.split("")
-        this_col = location_coordinates[0]
-        this_row = location_coordinates[1]
+        this_col = location_coordinates[1]
+        this_row = location_coordinates[0]
         
         if @color == "white"
             move_one = this_row + 1
@@ -61,12 +62,12 @@ class Pawn
             move_two = this_row - 2
         end
         
-        if board_array[this_col][move_one] == " "
-            finally << "#{this_col}#{move_one}"
+        if board_array[move_one][this_col] == " "
+            finally << "#{move_one}#{this_col}"
         end
 
-        if board_array[this_col][up_two] == " " && (this_row == 7 || this_row == 2)
-            finally << "#{this_col}#{move_two}"
+        if board_array[move_two][this_col] == " " && (this_row == 7 || this_row == 2)
+            finally << "#{move_two}#{this_col}"
         end
 
         return finally
