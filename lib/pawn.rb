@@ -57,9 +57,13 @@ class Pawn
         if @color == "white"
             move_one = this_row + 1
             move_two = this_row + 2
+            attack_right = [this_row + 1, this_col + 1]
+            attack_left = [this_row + 1, this_col - 1]
         else
             move_one = this_row - 1
             move_two = this_row - 2
+            attack_right = [this_row - 1, this_col + 1]
+            attack_left = [this_row - 1, this_col - 1]
         end
         
         if board_array[move_one][this_col] == " "
@@ -70,7 +74,14 @@ class Pawn
             finally << "#{move_two}#{this_col}"
         end
 
+        if board_array[attack_right[0]][attack_right[1]] != " " && @color != board_array[attack_right[0]][attack_right[1]].color
+            finally << attack_right.join("")
+        end
+
+        if board_array[attack_left[0]][attack_left[1]] != " " && @color != board_array[attack_left[0]][attack_left[1]].color
+            finally << attack_left.join("")
+        end
+
         return finally
     end
-
 end
