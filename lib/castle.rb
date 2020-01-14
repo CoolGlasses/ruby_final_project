@@ -48,7 +48,7 @@ class Castle
         next_col = this_col + 1
         done = false    
         while !done
-            if next_col == 10
+            if next_col == 9
                 done = true
             else
                 if board_array[this_row][next_col] == " "
@@ -96,7 +96,7 @@ class Castle
         next_row = this_row + 1
         done = false
         while !done
-            if next_row == 10
+            if next_row == 9
                 done = true
             else
                 if board_array[next_row][this_col] == " "

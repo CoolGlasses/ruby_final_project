@@ -45,11 +45,63 @@ class Bishop
     def valid_diagonal_right_up(board_array, this_row, this_col)
         finally = []
         next_row = this_row + 1
+        next_col = this_col - 1
+
+        done = false
+        while !done
+            if next_row == 9 || next_col == 0
+                done = true
+            else
+                if board_array[next_row][next_col] == " " 
+                    finally << "#{next_row}#{next_col}"
+                    next_row += 1
+                    next_col -= 1
+                elsif @color != board_array[next_row][next_col].color
+                    done = true
+                    finally << "#{next_row}#{next_col}"
+                else
+                    done = true
+                end
+            end
+        end
+
+        return finally
+    end
+
+    def valid_diagonal_right_down(board_array, this_row, this_col)
+        finally = []
+        next_row = this_row - 1
+        next_col = this_col - 1
+
+        done = false
+        while !done
+            if next_row == 0 || next_col == 00
+                done = true
+            else
+                if board_array[next_row][next_col] == " " 
+                    finally << "#{next_row}#{next_col}"
+                    next_row -= 1
+                    next_col -= 1
+                elsif @color != board_array[next_row][next_col].color
+                    done = true
+                    finally << "#{next_row}#{next_col}"
+                else
+                    done = true
+                end
+            end
+        end
+
+        return finally
+    end
+
+    def valid_diagonal_left_up(board_array, this_row, this_col)
+        finally = []
+        next_row = this_row + 1
         next_col = this_col + 1
 
         done = false
         while !done
-            if next_row == 10 || next_col == 10
+            if next_row == 9 || next_col == 9
                 done = true
             else
                 if board_array[next_row][next_col] == " " 
@@ -68,13 +120,30 @@ class Bishop
         return finally
     end
 
-    def valid_diagonal_right_down(board_array, this_row, this_col)
-    end
-
-    def valid_diagonal_left_up(board_array, this_row, this_col)
-    end
-
     def valid_diagonal_left_down(board_array, this_row, this_col)
+        finally = []
+        next_row = this_row - 1
+        next_col = this_col + 1
+
+        done = false
+        while !done
+            if next_row == 0 || next_col == 9
+                done = true
+            else
+                if board_array[next_row][next_col] == " " 
+                    finally << "#{next_row}#{next_col}"
+                    next_row -= 1
+                    next_col += 1
+                elsif @color != board_array[next_row][next_col].color
+                    done = true
+                    finally << "#{next_row}#{next_col}"
+                else
+                    done = true
+                end
+            end
+        end
+
+        return finally
     end 
 
 
