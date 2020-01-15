@@ -49,10 +49,12 @@ class Game
         end
 
         proposed_board = move_piece(move[0], move[1], board_array)
+        proposed_board = proposed_board.acquire_valid_moves
 
-        proposed_board = refresh_valid_moves(proposed_board)
+        if player.in_check == true && 
 
-        
+
+
 
     end
 
