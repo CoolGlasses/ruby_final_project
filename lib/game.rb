@@ -36,10 +36,59 @@ class Game
         return finally
     end
 
+    def valid_move_check(move, player, board_array)
+        if player.color == "white"
+            set = @white_set
+        else
+            set = @black_set
+        end
+
+        piece = move[0]
+        if !check_if_piece_can_move_there(piece, move[1])
+            return false
+        end
+
+        proposed_board = move_piece(move[0], move[1], board_array)
+
+        proposed_board = refresh_valid_moves(proposed_board)
+
+        
+
+    end
+
+    def check_if_piece_can_move_there(piece, move)
+        if piece.valid_moves.include(move)
+            return true
+        else
+            return false
+        end
+    end
+
+
+
     def location_converter(coordinates)
     end
 
-    def check(board_array)
+    def black_check
+        black_king = @black_set.pieces[-1]
+        white_moves = @white_set.valid_moves
+
+        if white_moves.include(black_king.location)
+            return true
+        else
+            return false
+        end 
+    end
+
+    def white_check
+        white_king = @white_set.pieces[-1]
+        black_moves = @black_set.valid_moves
+
+        if black_moves.include(white_king.location)
+            return true
+        else
+            return false
+        end
     end
 
     def check_check(player)
@@ -61,20 +110,17 @@ class Game
     def save
     end
 
-    def move_piece(origin, destination)
-        board = @board.board
+    def move_piece(origin, destination, board)
+        new_board = board
         this_row = origin[0]
         this_col = origin[1]
-        piece_to_move = board[this_row][this_col]
+        piece_to_move = new_board[this_row][this_col]
+        new_row = destination[0]
+        new_col = destination[1]
+        new_board[new_row][new_col] = piece_to_move
+        new_board[this_row][this_col] = " "
 
-        if piece_to_move.valid_moves.include?(destination)
-            new_row = destination[0]
-            new_col = destination[1]
-            board[new_row][new_col] = piece_to_move
-            board[this_row][this_col] = " "
-        else
-            p "invalid move"
-        end
+        return new_board
     end
 
     def play(turn=nil)

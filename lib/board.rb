@@ -12,10 +12,11 @@ require "queen.rb"
 
 
 class Board #8x8 playing surface, 9x9 if you include Row & Column Labels
-    attr_accessor :board
+    attr_accessor :board, :valid_moves
     
     def initialize
         @board = build_board()
+        @valid_moves = acquire_valid_moves()
     end
 
     def build_board
@@ -29,7 +30,26 @@ class Board #8x8 playing surface, 9x9 if you include Row & Column Labels
     end
 
     def place_pieces(set)
-
+        set.each do |piece|
+            @board[piece.location] = piece
         end
+    end
+
+    def acquire_valid_moves
+        finally = []
+
+        i = 1
+        
+        while i < 9
+            k = 1
+            while k < 9
+                @board[i][k].valid_moves.each do |move|
+                    finally << move
+                end
+            k += 1
+            end
+        i += 1
+        end
+        return finally
     end
 end
