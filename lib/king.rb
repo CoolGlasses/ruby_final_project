@@ -1,6 +1,7 @@
 class King
     attr_reader :num, :color
     attr_accessor :status, :location, :valid_moves
+    
     def initialize(num, color)
         @num = num
         @color = color

@@ -12,11 +12,12 @@ require "queen.rb"
 
 class ChessSet
     attr_reader :color
-    attr_accessor :pieces
+    attr_accessor :pieces, :valid_moves
 
     def initialize(color)
         @color = color
         @pieces = get_pieces(@color) ##an array of piece instances
+        @valid_moves = valid_moves(@pieces)
     end
 
     def get_pieces(color)
@@ -43,4 +44,17 @@ class ChessSet
 
         return finally
     end
+
+    def valid_moves(pieces)
+        finally = []
+
+        pieces.each do |piece|
+            piece.valid_moves.each do |valid_move|
+                finally << valid_move
+            end
+        end
+
+        return finally
+    end
+
 end

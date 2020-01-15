@@ -39,6 +39,9 @@ class Game
     def location_converter(coordinates)
     end
 
+    def check(board_array)
+    end
+
     def check_check(player)
         if player.in_check == true
             return true
