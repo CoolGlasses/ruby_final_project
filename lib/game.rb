@@ -32,26 +32,22 @@ class Game
         return finally
     end
 
-    def valid_move_check(move, player, board_array)
-        if player.color == "white"
-            set = @white_set
-        else
-            set = @black_set
-        end
-
+    def valid_move_check(move, player, board)
         piece = move[0]
         if !check_if_piece_can_move_there(piece, move[1])
             return false
         end
 
-        proposed_board = move_piece(move[0], move[1], board_array)
+        proposed_board = move_piece(move[0], move[1], board)
         proposed_board = proposed_board.acquire_valid_moves
 
-        
-
-
-
-
+        if checkmate_check(proposed_board) == true
+            game_over()
+        elsif board.check == true && proposed_board.check == true
+            return false
+        else
+            return true
+        end
     end
 
     def checkmate_check(board)
