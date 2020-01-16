@@ -11,16 +11,12 @@ require "player.rb"
 require "queen.rb"
 
 class Game
-    attr_accessor :board, :white_set, :black_set
+    attr_accessor :board
 
     def initialize
         @player1 = Player.new
         @player2 = Player.new(@player1.color)
         @board = Board.new
-        @white_set = ChessSet.new("white")
-        @black_set = ChessSet.new("black")
-        @board.place_pieces(@white_set)
-        @board.place_pieces(@black_set)
     end
 
     def get_move(player) 
@@ -71,43 +67,8 @@ class Game
     def location_converter(coordinates)
     end
 
-    def black_check
-        black_king = @black_set.pieces[-1]
-        white_moves = @white_set.valid_moves
 
-        if white_moves.include(black_king.location)
-            return true
-        else
-            return false
-        end 
-    end
 
-    def white_check
-        white_king = @white_set.pieces[-1]
-        black_moves = @black_set.valid_moves
-
-        if black_moves.include(white_king.location)
-            return true
-        else
-            return false
-        end
-    end
-
-    def check_check(player)
-        if player.in_check == true
-            return true
-        end
-
-        return false
-    end
-
-    def checkmate_check(player)
-        if player.checkmate == true
-            return true
-        end
-
-        return false
-    end
 
     def save
     end
