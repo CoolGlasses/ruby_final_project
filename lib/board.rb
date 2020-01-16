@@ -12,7 +12,7 @@ require "queen.rb"
 
 
 class Board #8x8 playing surface, 9x9 if you include Row & Column Labels
-    attr_accessor :board, :valid_moves, :check, :checkmate, :player_in_check
+    attr_accessor :board, :valid_moves, :check, :checkmate, :player_in_check, :white_set, :black_set
     
     def initialize
         @board = build_board()
@@ -20,6 +20,10 @@ class Board #8x8 playing surface, 9x9 if you include Row & Column Labels
         @check = false
         @checkmate = false
         @player_in_check = nil
+        @white_set = ChessSet.new("white")
+        @black_set = ChessSet.new("black")
+        @board.place_pieces(@white_set)
+        @board.place_pieces(@black_set)
     end
 
     def build_board
