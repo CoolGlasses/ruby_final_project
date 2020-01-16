@@ -42,10 +42,13 @@ class Game
         proposed_board = proposed_board.acquire_valid_moves
 
         if checkmate_check(proposed_board) == true
-            game_over()
+            proposed_board.checkmate = true
+            @board = proposed_board
+            game_over(@board)
         elsif board.check == true && proposed_board.check == true
             return false
         else
+            @board = proposed_board
             return true
         end
     end
@@ -58,6 +61,8 @@ class Game
                 return false
             end
         end
+
+        return true
     end
 
     def check_if_piece_can_move_there(piece, move)
@@ -73,7 +78,13 @@ class Game
     def location_converter(coordinates)
     end
 
-
+    def game_over(board)
+        if board.player_in_check == "black"
+            p "Gameover! White player wins!"
+        else
+            p "Gameover! Black player wins!"
+        end
+    end
 
 
     def save
