@@ -12,11 +12,14 @@ require "queen.rb"
 
 
 class Board #8x8 playing surface, 9x9 if you include Row & Column Labels
-    attr_accessor :board, :valid_moves
+    attr_accessor :board, :valid_moves, :check, :checkmate, :player_in_check
     
     def initialize
         @board = build_board()
         @valid_moves = acquire_valid_moves()
+        @check = false
+        @checkmate = false
+        @player_in_check = nil
     end
 
     def build_board
