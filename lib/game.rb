@@ -54,6 +54,16 @@ class Game
 
     end
 
+    def checkmate_check(board)
+        board.valid_moves.each do |move|
+            proposed_board = move_piece(move[0], move[1], board)
+            proposed_board = proposed_board.acquire_valid_moves
+            if proposed_board.black_check == false || proposed_board.white_check == false
+                return false
+            end
+        end
+    end
+
     def check_if_piece_can_move_there(piece, move)
         if piece.valid_moves.include(move)
             return true
