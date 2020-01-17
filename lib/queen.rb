@@ -20,8 +20,8 @@ class Queen
 
     def next_valid_moves(board_array)
         finally = []
-        this_col = location[1]
-        this_row = location[0]
+        this_col = @location[1]
+        this_row = @location[0]
         finally << valid_diagonal_left_up(board_array, this_row, this_col)
         finally << valid_diagonal_left_down(board_array, this_row, this_col)
         finally << valid_diagonal_right_down(board_array, this_row, this_col)

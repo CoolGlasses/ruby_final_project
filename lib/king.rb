@@ -21,8 +21,8 @@ class King
 
     def next_valid_moves(board_array)
         finally = []
-        this_col = location[1]
-        this_row = location[0]
+        this_col = @location[1]
+        this_row = @location[0]
         finally << valid_move_up(board_array, this_row, this_col)
         finally << valid_move_left(board_array, this_row, this_col)
         finally << valid_move_down(board_array, this_row, this_col)
