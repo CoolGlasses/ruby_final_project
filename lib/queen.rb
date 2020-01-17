@@ -12,17 +12,16 @@ class Queen
 
     def set_location(color)
         if color == "white"
-            return "d1"
+            return [1, 4]
         else
-            return "d8"
+            return [8, 4]
         end
     end
 
     def next_valid_moves(board_array)
         finally = []
-        location_coordinates = @location.split("")
-        this_col = location_coordinates[1]
-        this_row = location_coordinates[0]
+        this_col = location[1]
+        this_row = location[0]
         finally << valid_diagonal_left_up(board_array, this_row, this_col)
         finally << valid_diagonal_left_down(board_array, this_row, this_col)
         finally << valid_diagonal_right_down(board_array, this_row, this_col)
@@ -46,12 +45,12 @@ class Queen
                 done = true
             else
                 if board_array[next_row][next_col] == " " 
-                    finally << "#{next_row}#{next_col}"
+                    finally << [next_row, next_col]
                     next_row += 1
                     next_col -= 1
                 elsif @color != board_array[next_row][next_col].color
                     done = true
-                    finally << "#{next_row}#{next_col}"
+                    finally << [next_row, next_col]
                 else
                     done = true
                 end
@@ -72,12 +71,12 @@ class Queen
                 done = true
             else
                 if board_array[next_row][next_col] == " " 
-                    finally << "#{next_row}#{next_col}"
+                    finally << [next_row, next_col]
                     next_row -= 1
                     next_col -= 1
                 elsif @color != board_array[next_row][next_col].color
                     done = true
-                    finally << "#{next_row}#{next_col}"
+                    finally << [next_row, next_col]
                 else
                     done = true
                 end
@@ -98,12 +97,12 @@ class Queen
                 done = true
             else
                 if board_array[next_row][next_col] == " " 
-                    finally << "#{next_row}#{next_col}"
+                    finally << [next_row, next_col]
                     next_row += 1
                     next_col += 1
                 elsif @color != board_array[next_row][next_col].color
                     done = true
-                    finally << "#{next_row}#{next_col}"
+                    finally << [next_row, next_col]
                 else
                     done = true
                 end
@@ -124,12 +123,12 @@ class Queen
                 done = true
             else
                 if board_array[next_row][next_col] == " " 
-                    finally << "#{next_row}#{next_col}"
+                    finally << [next_row, next_col]
                     next_row -= 1
                     next_col += 1
                 elsif @color != board_array[next_row][next_col].color
                     done = true
-                    finally << "#{next_row}#{next_col}"
+                    finally << [next_row, next_col]
                 else
                     done = true
                 end
@@ -149,11 +148,11 @@ class Queen
                 done = true
             else
                 if board_array[this_row][next_col] == " "
-                    finally << "#{this_row}#{next_col}"
+                    finally << [this_row, next_col]
                     next_col += 1
                 elsif @color != board_array[this_row][next_col].color
                     done = true
-                    finally << "#{this_row}#{next_col}"
+                    finally << [this_row, next_col]
                 else
                     done = true
                 end
@@ -173,11 +172,11 @@ class Queen
                 done = true
             else
                 if board_array[this_row][next_col] == " "
-                    finally << "#{this_row}#{next_col}"
+                    finally << [this_row, next_col]
                     next_col -= 1
                 elsif @color != board_array[this_row][next_col].color
                     done = true
-                    finally << "#{this_row}#{next_col}"
+                    finally << [this_row, next_col]
                 else
                     done = true
                 end
@@ -197,11 +196,11 @@ class Queen
                 done = true
             else
                 if board_array[next_row][this_col] == " "
-                    finally << "#{next_row}#{this_col}"
+                    finally << [next_row, this_col]
                     next_row += 1
                 elsif @color != board_array[next_row][this_col].color
                     done = true
-                    finally << "#{next_row}#{this_col}"
+                    finally << [next_row, this_col]
                 else
                     done = true
                 end
@@ -221,11 +220,11 @@ class Queen
                 done = true
             else
                 if board_array[next_row][this_col] == " "
-                    finally << "#{next_row}#{this_col}"
+                    finally << [next_row, this_col]
                     next_row -= 1
                 elsif @color != board_array[next_row][this_col].color
                     done = true
-                    finally << "#{next_row}#{this_col}"
+                    finally << [next_row, this_col]
                 else
                     done = true
                 end
