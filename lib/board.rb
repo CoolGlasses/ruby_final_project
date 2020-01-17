@@ -38,34 +38,9 @@ class Board #8x8 playing surface, 9x9 if you include Row & Column Labels
 
     def place_pieces(set)
         set.each do |piece|
-            @board[piece.location] = piece
+            location = piece.location
+            @board[location[0]][location[1]] = piece
         end
-    end
-
-    def location_converter(string_location)
-        finally = string_location.split("")
-        finally[0] = finally[0].to_i
-
-        case finally[1]
-            when "a"
-                finally[1] = 1
-            when "b"
-                finally[1] = 2
-            when "c"
-                finally[1] = 3
-            when "d"
-                finally[1] = 4
-            when "e"
-                finally[1] = 5
-            when "f"
-                finally[1] = 6
-            when "g"
-                finally[1] = 7
-            when "h"
-                finally[1] = 8
-        end
-
-        return finally
     end
 
     def acquire_valid_moves
@@ -76,6 +51,7 @@ class Board #8x8 playing surface, 9x9 if you include Row & Column Labels
         while i < 9
             k = 1
             while k < 9
+                @board[i][k].next_valid_moves(@board) ##this wont work!
                 @board[i][k].valid_moves.each do |move|
                     finally << move
                 end
