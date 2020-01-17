@@ -95,6 +95,7 @@ class Game
             @game_over = true
             return true
         elsif board.check == true && proposed_board.check == true
+            p "Still in check!"
             return false
         else
             @board = proposed_board
