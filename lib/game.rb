@@ -93,7 +93,7 @@ class Game
     end
 
     def check_if_piece_can_move_there(piece, move)
-        if piece.valid_moves.include(move)
+        if piece.valid_moves.include?(move)
             return true
         else
             return false

@@ -96,7 +96,7 @@ class Board #8x8 playing surface, 9x9 if you include Row & Column Labels
     def black_check
         black_king = @black_set.pieces[-1]
 
-        if valid_moves.include(black_king.location)
+        if valid_moves.include?(black_king.location)
             @check = true
             @player_in_check = "black"
             return true
@@ -108,7 +108,7 @@ class Board #8x8 playing surface, 9x9 if you include Row & Column Labels
     def white_check
         white_king = @white_set.pieces[-1]
 
-        if valid_moves.include(white_king.location)
+        if valid_moves.include?(white_king.location)
             @check = true
             @player_in_check = "white"
             return true
