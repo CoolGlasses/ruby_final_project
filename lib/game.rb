@@ -20,9 +20,6 @@ class Game
         @game_over = false
     end
 
-    def location_converter(coordinates)
-    end
-
     def save
     end
 

@@ -17,7 +17,7 @@ class ChessSet
     def initialize(color)
         @color = color
         @pieces = get_pieces(@color) ##an array of piece instances
-        @valid_moves = valid_moves(@pieces)
+        @valid_moves = []
     end
 
     def get_pieces(color)
@@ -54,7 +54,7 @@ class ChessSet
             end
         end
 
-        return finally
+        @valid_moves = finally
     end
 
 end

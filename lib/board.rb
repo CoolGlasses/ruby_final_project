@@ -16,7 +16,6 @@ class Board #8x8 playing surface, 9x9 if you include Row & Column Labels
     
     def initialize
         @board = build_board()
-        @valid_moves = acquire_valid_moves()
         @check = false
         @checkmate = false
         @player_in_check = nil
@@ -24,6 +23,7 @@ class Board #8x8 playing surface, 9x9 if you include Row & Column Labels
         @black_set = ChessSet.new("black")
         @board.place_pieces(@white_set)
         @board.place_pieces(@black_set)
+        @valid_moves = acquire_valid_moves()
     end
 
     def build_board
@@ -40,6 +40,32 @@ class Board #8x8 playing surface, 9x9 if you include Row & Column Labels
         set.each do |piece|
             @board[piece.location] = piece
         end
+    end
+
+    def location_converter(string_location)
+        finally = string_location.split("")
+        finally[0] = finally[0].to_i
+
+        case finally[1]
+            when "a"
+                finally[1] = 1
+            when "b"
+                finally[1] = 2
+            when "c"
+                finally[1] = 3
+            when "d"
+                finally[1] = 4
+            when "e"
+                finally[1] = 5
+            when "f"
+                finally[1] = 6
+            when "g"
+                finally[1] = 7
+            when "h"
+                finally[1] = 8
+        end
+
+        return finally
     end
 
     def acquire_valid_moves
