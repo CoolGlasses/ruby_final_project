@@ -60,6 +60,14 @@ class Board #8x8 playing surface, 9x9 if you include Row & Column Labels
         return finally
     end
 
+    def check_check
+        if white_check() == true || black_check() == true
+            @check = true
+            p "Check!"
+            return true
+        end
+    end
+
     def black_check
         black_king = @black_set.pieces[-1]
 

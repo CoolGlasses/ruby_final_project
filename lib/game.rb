@@ -17,6 +17,54 @@ class Game
         @player1 = Player.new
         @player2 = Player.new(@player1.color)
         @board = Board.new
+        @game_over = false
+    end
+
+    def location_converter(coordinates)
+    end
+
+    def game_over(board)
+        if board.player_in_check == "black"
+            p "Gameover! White player wins!"
+        else
+            p "Gameover! Black player wins!"
+        end
+
+    end
+
+    def save
+    end
+
+    def play(turn=nil)
+        while !@game_over
+            if turn == nil
+                if @player1.color == "white"
+                    turn = @player1
+                else
+                    turn = @player2
+                end
+            end
+
+            player_name = turn.name
+
+            p "Okay #{player_name}, you're up!"
+            move = get_move(turn)
+            if valid_move_check(move, turn, @board) == false
+                p "That is not a valid move.  Please try again."
+            elsif @game_over == false
+                if turn == @player1
+                    turn = @player2
+                else
+                    turn = @player1
+                end
+            end
+
+            if @board.check == true
+                p "Check!"
+            end
+
+        end
+        game_over(@board)
     end
 
     def get_move(player) 
@@ -44,25 +92,15 @@ class Game
         if checkmate_check(proposed_board) == true
             proposed_board.checkmate = true
             @board = proposed_board
-            game_over(@board)
+            @game_over = true
+            return true
         elsif board.check == true && proposed_board.check == true
             return false
         else
             @board = proposed_board
+            @board.check_check()
             return true
         end
-    end
-
-    def checkmate_check(board)
-        board.valid_moves.each do |move|
-            proposed_board = move_piece(move[0], move[1], board)
-            proposed_board = proposed_board.acquire_valid_moves
-            if proposed_board.black_check == false || proposed_board.white_check == false
-                return false
-            end
-        end
-
-        return true
     end
 
     def check_if_piece_can_move_there(piece, move)
@@ -71,23 +109,6 @@ class Game
         else
             return false
         end
-    end
-
-
-
-    def location_converter(coordinates)
-    end
-
-    def game_over(board)
-        if board.player_in_check == "black"
-            p "Gameover! White player wins!"
-        else
-            p "Gameover! Black player wins!"
-        end
-    end
-
-
-    def save
     end
 
     def move_piece(origin, destination, board)
@@ -103,44 +124,16 @@ class Game
         return new_board
     end
 
-    def play(turn=nil)
-        game_over = false
-        while !game_over
-            if turn == nil
-                if @player1.color == "white"
-                    turn = @player1
-                else
-                    turn = @player2
-                end
-            end
-
-            player_name = turn.name
-
-            p "Okay #{player_name}, you're up!"
-            move = get_move(turn)
-            move_piece(move[0], move[1])
-
-            if turn == @player1
-                if checkmate_check(@player2) == true
-                    p "Checkmate! #{player_name} wins!"
-                    game_over = true
-                elsif check_check(@player2) == true
-                    p "Check!"
-                    turn = @player2
-                else
-                    turn = @player2
-                end
-            else
-                if checkmate_check(@player1) == true
-                    p "Checkmate! #{player_name} wins!"
-                    game_over = true
-                elsif check_check(@player1) == true
-                    p "Check!"
-                    turn = @player1
-                else
-                    turn = @player1
-                end
+    def checkmate_check(board)
+        board.valid_moves.each do |move|
+            proposed_board = move_piece(move[0], move[1], board)
+            proposed_board = proposed_board.acquire_valid_moves
+            if proposed_board.black_check == false || proposed_board.white_check == false
+                return false
             end
         end
+
+        return true
     end
+
 end

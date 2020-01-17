@@ -16,7 +16,7 @@ class Player
         return name
     end
 
-    def get_player_color(color)
+    def get_player_color(color) ##needs error checking
         if color == nil
             puts "What color would you like to be?"
             color = gets.chomp
