@@ -61,8 +61,15 @@ class Board #8x8 playing surface, 9x9 if you include Row & Column Labels
     end
 
     def check_check
-        if white_check() == true || black_check() == true
+        if white_check() == true
             @check = true
+            @player_in_check = "white"
+        elsif black_check() == true
+            @check = true
+            @player_in_check = "black"
+        else
+            @check = false
+            @player_in_check = nil
         end
     end
 

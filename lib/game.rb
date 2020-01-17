@@ -23,15 +23,6 @@ class Game
     def location_converter(coordinates)
     end
 
-    def game_over(board)
-        if board.player_in_check == "black"
-            p "Gameover! White player wins!"
-        else
-            p "Gameover! Black player wins!"
-        end
-
-    end
-
     def save
     end
 
@@ -135,6 +126,15 @@ class Game
         end
 
         return true
+    end
+
+    def game_over(board)
+        if board.player_in_check == "black"
+            p "Gameover! White player wins!"
+        else
+            p "Gameover! Black player wins!"
+        end
+
     end
 
 end
