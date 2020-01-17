@@ -43,7 +43,7 @@ class Board #8x8 playing surface, 9x9 if you include Row & Column Labels
         end
     end
 
-    def acquire_valid_moves
+    def trigger_valid_moves_functions
         finally = []
 
         i = 1
@@ -51,7 +51,25 @@ class Board #8x8 playing surface, 9x9 if you include Row & Column Labels
         while i < 9
             k = 1
             while k < 9
-                @board[i][k].next_valid_moves(@board) ##this wont work!
+                @board[i][k].next_valid_moves(@board)
+                end
+            k += 1
+            end
+        i += 1
+        end
+        return finally
+    end
+
+
+    def acquire_valid_moves
+        trigger_valid_moves_functions()
+        finally = []
+
+        i = 1
+        
+        while i < 9
+            k = 1
+            while k < 9
                 @board[i][k].valid_moves.each do |move|
                     finally << move
                 end
