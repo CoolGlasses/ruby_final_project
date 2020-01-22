@@ -1,5 +1,5 @@
 class King
-    attr_reader :num, :color
+    attr_reader :num, :color, :unicode
     attr_accessor :status, :location, :valid_moves
 
     def initialize(num, color)
@@ -8,7 +8,7 @@ class King
         @status = "free"
         @location = set_location(@color)
         @valid_moves = []
-
+        @unicode = set_unicode_value(@color)
     end
 
     def set_location(color)
@@ -16,6 +16,14 @@ class King
             return [1, 5]
         else
             return [8, 5]
+        end
+    end
+
+    def set_unicode_value(color)
+        if color == "white"
+            return "\u2654"
+        else
+            return "\u265a"
         end
     end
 
