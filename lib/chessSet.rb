@@ -1,14 +1,10 @@
 require "byebug"
-require "bishop.rb"
-require "board.rb"
-require "castle.rb"
-require "chess.rb"
-require "game.rb"
-require "king.rb"
-require "knight.rb"
-require "pawn.rb"
-require "player.rb"
-require "queen.rb"
+require_relative "bishop"
+require_relative "castle"
+require_relative "king"
+require_relative "knight"
+require_relative "pawn"
+require_relative "queen"
 
 class ChessSet
     attr_reader :color

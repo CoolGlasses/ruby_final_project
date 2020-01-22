@@ -1,14 +1,14 @@
 require "byebug"
-require "bishop.rb"
-require "board.rb"
-require "castle.rb"
-require "chess.rb"
-require "chessSet.rb"
-require "king.rb"
-require "knight.rb"
-require "pawn.rb"
-require "player.rb"
-require "queen.rb"
+
+require_relative "bishop"
+require_relative "board"
+require_relative "castle"
+require_relative "chessSet"
+require_relative "king"
+require_relative "knight"
+require_relative "pawn"
+require_relative "player"
+require_relative "queen"
 
 class Game
     attr_accessor :board
@@ -23,8 +23,8 @@ class Game
     def save
     end
 
-    def print_the_board(@board)
-        the_board = @board.board
+    def print_the_board(board)
+        the_board = board.board
         the_board.each do |row|
             row.each do |space|
                 print space.encode('utf-8')
