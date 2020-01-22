@@ -1,6 +1,6 @@
 class Pawn
     attr_reader :num, :color, :unicode
-    attr_accessor :status, :valid_moves
+    attr_accessor :status, :valid_moves, :location
 
     def initialize(num, color)
         @num = num
@@ -9,14 +9,6 @@ class Pawn
         @location = set_location(@num, @color)
         @valid_moves = []
         @unicode = set_unicode_value(@color)
-    end
-
-    def location
-        @location
-    end
-
-    def location=(board_array, destination_array)
-        @location = destination_array.join("")
     end
 
     def set_location(num, color)

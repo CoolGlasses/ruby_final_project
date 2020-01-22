@@ -1,3 +1,5 @@
+require "byebug"
+
 class Board #8x8 playing surface, 9x9 if you include Row & Column Labels
     attr_accessor :board, :valid_moves, :check, :checkmate, :player_in_check, :white_set, :black_set
     
@@ -8,8 +10,8 @@ class Board #8x8 playing surface, 9x9 if you include Row & Column Labels
         @player_in_check = nil
         @white_set = ChessSet.new("white")
         @black_set = ChessSet.new("black")
-        @board.place_pieces(@white_set)
-        @board.place_pieces(@black_set)
+        place_pieces(@white_set.pieces)
+        place_pieces(@black_set.pieces)
         @valid_moves = acquire_valid_moves()
     end
 
@@ -21,6 +23,7 @@ class Board #8x8 playing surface, 9x9 if you include Row & Column Labels
         8.downto(1).each do |row|
             finally[row][0] = row.to_s
         end
+        return finally
     end
 
     def place_pieces(set)
