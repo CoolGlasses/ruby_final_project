@@ -1,5 +1,5 @@
 class Pawn
-    attr_reader :num, :color
+    attr_reader :num, :color, :unicode
     attr_accessor :status, :valid_moves
 
     def initialize(num, color)
@@ -8,6 +8,7 @@ class Pawn
         @status = "free"
         @location = set_location(@num, @color)
         @valid_moves = []
+        @unicode = set_unicode_value(@color)
     end
 
     def location
@@ -29,6 +30,14 @@ class Pawn
         col = num
 
         return [row, col]
+    end
+
+    def set_unicode_value(color)
+        if color == "white"
+            return "\u2659"
+        else
+            return "\u265f"
+        end
     end
 
 
