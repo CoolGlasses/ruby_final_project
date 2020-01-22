@@ -23,6 +23,15 @@ class Game
     def save
     end
 
+    def print_the_board(board)
+        the_board = board.board
+        the_board.each do |row|
+            row.each do |space|
+                print space.encode('utf-8')
+            end
+        end
+    end
+
     def play(turn=nil)
         while !@game_over
             if turn == nil
