@@ -32,7 +32,7 @@ class ChessSet
         end
 
         (1..2).each do |num|
-            finally << Rook.new(num, color)
+            finally << Bishop.new(num, color)
         end
 
         finally << Queen.new(color)

@@ -2,8 +2,7 @@ class King
     attr_reader :num, :color, :unicode
     attr_accessor :status, :location, :valid_moves
 
-    def initialize(num, color)
-        @num = num
+    def initialize(color)
         @color = color
         @status = "free"
         @location = set_location(@color)
