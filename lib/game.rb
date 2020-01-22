@@ -23,8 +23,8 @@ class Game
     def save
     end
 
-    def print_the_board(board)
-        the_board = board.board
+    def print_the_board(@board)
+        the_board = @board.board
         the_board.each do |row|
             row.each do |space|
                 print space.encode('utf-8')
@@ -43,7 +43,8 @@ class Game
             end
 
             player_name = turn.name
-
+            print_the_board(@board)
+            puts
             p "Okay #{player_name}, you're up!"
             move = get_move(turn)
             if valid_move_check(move, turn, @board) == false
@@ -57,7 +58,9 @@ class Game
             end
 
             if @board.check == true
+                puts
                 p "Check!"
+                puts
             end
 
         end
