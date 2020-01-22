@@ -1,5 +1,5 @@
 class Castle
-    attr_reader :num, :color
+    attr_reader :num, :color, :unicode
     attr_accessor :status, :location, :valid_moves
 
     def initialize(num, color)
@@ -8,6 +8,7 @@ class Castle
         @status = "free"
         @location = set_location(@num, @color)
         @valid_moves = []
+        @unicode = set_unicode_value(@color)
     end
 
     def set_location(num, color)
@@ -27,6 +28,14 @@ class Castle
         end
 
         return [row, col]
+    end
+
+    def set_unicode_value(color)
+        if color == "white"
+            return "\u2656"
+        else
+            return "\u265c"
+        end
     end
 
     def next_valid_moves(board_array)

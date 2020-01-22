@@ -40,7 +40,6 @@ class Pawn
         end
     end
 
-
     def next_valid_moves(board_array)
         finally = []
         this_col = @location[1]
