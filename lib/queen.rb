@@ -1,5 +1,5 @@
 class Queen
-    attr_reader :num, :color
+    attr_reader :num, :color, :unicode
     attr_accessor :status, :location, :valid_moves
 
     def initialize(num, color)
@@ -8,6 +8,7 @@ class Queen
         @status = "free"
         @location = set_location(@color)
         @valid_moves = []
+        @unicode = set_unicode_value(@color)
     end
 
     def set_location(color)
@@ -15,6 +16,14 @@ class Queen
             return [1, 4]
         else
             return [8, 4]
+        end
+    end
+
+    def set_unicode_value(color)
+        if color == "white"
+            return "\u2655"
+        else
+            return "\u265b"
         end
     end
 
