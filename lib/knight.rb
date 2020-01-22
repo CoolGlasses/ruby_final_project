@@ -1,5 +1,5 @@
 class Knight
-    attr_reader :num, :color
+    attr_reader :num, :color, :unicode
     attr_accessor :status, :location, :valid_moves
     def initialize(num, color)
         @num = num
@@ -7,6 +7,7 @@ class Knight
         @status = "free"
         @location = set_location(@num, @color)
         @valid_moves = []
+        @unicode = set_unicode_value(@color)
     end
 
     def set_location(num, color)
@@ -26,6 +27,14 @@ class Knight
         end
 
         return [row, col]
+    end
+
+    def set_unicode_value(color)
+        if color == "white"
+            return "\u2658"
+        else
+            return "\u265e"
+        end
     end
 
     def next_valid_moves(board_array)
