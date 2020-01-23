@@ -53,12 +53,16 @@ class Knight
         return finally
     end
 
-    def valid_tall_left_up(board_array, this_row, this_col)
+    def valid_tall_left_up(board_array, this_row, this_col) ##What if the cell we're looking to move to is empty?  .color will return a No Method Error
         next_row = this_row + 2
         next_col = this_col + 1
 
-        if next_row < 9 && next_col < 9 && @color != board_array[next_row][next_col].color
-            return [next_row, next_col]
+        if next_row < 9 && next_col < 9
+            if board_array[next_row][next_col] == " "
+                return [next_row, next_col]
+            elsif @color != board_array[next_row][next_col].color
+                return [next_row, next_col]
+            end
         end
     end
 
@@ -66,8 +70,12 @@ class Knight
         next_row = this_row - 2
         next_col = this_col + 1
 
-        if next_row > 0 && next_col < 9 && @color != board_array[next_row][next_col].color
-            return [next_row, next_col]
+        if next_row > 0 && next_col < 9
+            if board_array[next_row][next_col] == " "
+                return [next_row, next_col]
+            elsif @color != board_array[next_row][next_col].color
+                return [next_row, next_col]
+            end
         end
     end
 
@@ -75,8 +83,12 @@ class Knight
         next_row = this_row - 2
         next_col = this_col - 1
 
-        if next_row > 0 && next_col > 0 && @color != board_array[next_row][next_col].color
-            return [next_row, next_col]
+        if next_row > 0 && next_col > 0
+            if board_array[next_row][next_col] == " "
+                return [next_row, next_col]
+            elsif @color != board_array[next_row][next_col].color
+                return [next_row, next_col]
+            end
         end
     end
 
@@ -84,8 +96,12 @@ class Knight
         next_row = this_row + 2
         next_col = this_col - 1
 
-        if next_row < 9 && next_col > 0 && @color != board_array[next_row][next_col].color
-            return [next_row, next_col]
+        if next_row < 9 && next_col > 0
+            if board_array[next_row][next_col] == " "
+                return [next_row, next_col]
+            elsif @color != board_array[next_row][next_col].color
+                return [next_row, next_col]
+            end
         end
     end
 
@@ -93,8 +109,12 @@ class Knight
         next_row = this_row + 1
         next_col = this_col + 2
 
-        if next_row < 9 && next_col < 9 && @color != board_array[next_row][next_col].color
-            return [next_row, next_col]
+        if next_row < 9 && next_col < 9
+            if board_array[next_row][next_col] == " "
+                return [next_row, next_col]
+            elsif @color != board_array[next_row][next_col].color
+                return [next_row, next_col]
+            end
         end
     end
 
@@ -102,8 +122,12 @@ class Knight
         next_row = this_row - 1
         next_col = this_col + 2
 
-        if next_row < 9 && next_col > 0 && @color != board_array[next_row][next_col].color
-            return [next_row, next_col]
+        if next_row > 0 && next_col < 9
+            if board_array[next_row][next_col] == " "
+                return [next_row, next_col]
+            elsif @color != board_array[next_row][next_col].color
+                return [next_row, next_col]
+            end
         end
     end
 
@@ -111,8 +135,12 @@ class Knight
         next_row = this_row - 1
         next_col = this_col - 2
 
-        if next_row > 0 && next_col > 0 && @color != board_array[next_row][next_col].color
-            return [next_row, next_col]
+        if next_row > 0 && next_col > 0
+            if board_array[next_row][next_col] == " "
+                return [next_row, next_col]
+            elsif @color != board_array[next_row][next_col].color
+                return [next_row, next_col]
+            end
         end
     end
 
@@ -120,8 +148,12 @@ class Knight
         next_row = this_row + 1
         next_col = this_col - 2
 
-        if next_row < 9 && next_col > 0 && @color != board_array[next_row][next_col].color
-            return [next_row, next_col]
+        if next_row < 9 && next_col > 0 
+            if board_array[next_row][next_col] == " "
+                return [next_row, next_col]
+            elsif @color != board_array[next_row][next_col].color
+                return [next_row, next_col]
+            end
         end
     end
 
