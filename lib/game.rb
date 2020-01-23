@@ -27,7 +27,11 @@ class Game
         the_board = board.board
         the_board.each do |row|
             row.each do |space|
-                print space.encode('utf-8')
+                if space.is_a? String
+                    print space
+                else 
+                    print space.unicode.encode('utf-8')
+                end
             end
         end
     end
