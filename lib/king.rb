@@ -41,33 +41,48 @@ class King
     def valid_move_up(board_array, this_row, this_col)
         next_row = this_row + 1
 
-        if next_row < 9 && @color != board_array[next_row][next_col].color
-            return [next_row, this_col]
+        if next_row < 9
+            if board_array[next_row][this_col] == " "
+                return [next_row, this_col]
+            elsif @color != board_array[next_row][this_col].color
+                return [next_row, this_col]
+            end
         end
     end
 
     def valid_move_left(board_array, this_row, this_col)
         next_col = this_col + 1
 
-        if next_col < 9 && @color != board_array[next_row][next_col].color
-            return [this_row, next_col]
+        if next_col < 9
+            if board_array[this_row][next_col] == " "
+                return [this_row, next_col]
+            elsif @color != board_array[this_row][next_col].color
+                return [this_row, next_col]
+            end
         end
     end
 
     def valid_move_down(board_array, this_row, this_col)
         next_row = this_row - 1
 
-        if next_row < 0 && @color != board_array[next_row][next_col].color
-            return [next_row, this_col]
+        if next_row > 0
+            if board_array[next_row][this_col] == " "
+                return [next_row, this_col]
+            elsif @color != board_array[next_row][this_col].color
+                return [next_row, this_col]
+            end
         end
     end
 
     def valid_move_right(board_array, this_row, this_col)
         next_col = this_col - 1
 
-        if next_col > 0 && @color != board_array[next_row][next_col].color
-            return [this_row, next_col]
+        if next_col > 0
+            if board_array[this_row][next_col] == " "
+              return [this_row, next_col]  
+            elsif @color != board_array[this_row][next_col].color
+                return [this_row, next_col]
+            end
         end
     end
-
 end
