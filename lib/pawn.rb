@@ -32,7 +32,7 @@ class Pawn
         end
     end
 
-    def next_valid_moves(board_array)
+    def next_valid_moves(board_array) ###need to allow for castling, break into smaller helper functions, etc.
         finally = []
         this_col = @location[1]
         this_row = @location[0]

@@ -83,7 +83,7 @@ class Bishop
 
         done = false
         while !done
-            if next_row == 0 || next_col == 00
+            if next_row == 0 || next_col == 0
                 done = true
             else
                 if board_array[next_row][next_col] == " " 
