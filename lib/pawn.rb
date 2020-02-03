@@ -49,7 +49,7 @@ class Pawn
             finally << black_attack_left(board_array, this_row, this_col)
         end
 
-        return finally
+        return finally.flatten
     end
 
     def white_move_one(board_array, this_row, this_col)
@@ -57,7 +57,7 @@ class Pawn
         move_one = this_row + 1
         
         if board_array[move_one][this_col] == " "
-            finally << [move_one, this_col]
+            finally << [move_one, this_col].join("")
         end
 
         return finally
@@ -69,7 +69,7 @@ class Pawn
 
         if this_row == 2
             if board_array[move_two][this_col] == " "
-                finally << [move_two, this_col]
+                finally << [move_two, this_col].join("")
             end
         end
 
@@ -82,7 +82,7 @@ class Pawn
 
         if board_array[attack_right[0]][attack_right[1]] != " " && (this_row + 1) < 9 && (this_col + 1) < 9
             if @color != board_array[attack_right[0]][attack_right[1]].color
-                finally << attack_right
+                finally << attack_right.join("")
             end
         end
 
@@ -95,7 +95,7 @@ class Pawn
 
         if board_array[attack_left[0]][attack_left[1]] != " "  && (this_row + 1) < 9 && (this_col - 1) > 0
             if @color != board_array[attack_left[0]][attack_left[1]].color
-                finally << attack_left
+                finally << attack_left.join("")
             end
         end
 
@@ -107,7 +107,7 @@ class Pawn
         move_one = this_row - 1
 
         if board_array[move_one][this_col] == " "
-            finally << [move_one, this_col]
+            finally << [move_one, this_col].join("")
         end
 
         return finally
@@ -119,7 +119,7 @@ class Pawn
 
         if this_row == 7
             if board_array[move_two][this_col] == " "
-                finally << [move_two, this_col]
+                finally << [move_two, this_col].join("")
             end
         end
 
@@ -132,7 +132,7 @@ class Pawn
 
          if board_array[attack_right[0]][attack_right[1]] != " "  && (this_row - 1) > 0 && (this_col + 1) < 9
             if @color != board_array[attack_right[0]][attack_right[1]].color
-                finally << attack_right
+                finally << attack_right.join("")
             end
         end
 
@@ -145,7 +145,7 @@ class Pawn
 
         if board_array[attack_left[0]][attack_left[1]] != " "  && (this_row - 1) > 0 && (this_col - 1) < 0
             if @color != board_array[attack_left[0]][attack_left[1]].color
-                finally << attack_left
+                finally << attack_left.join("")
             end
         end
 
