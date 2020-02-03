@@ -66,7 +66,7 @@ class Board #8x8 playing surface, 9x9 if you include Row & Column Labels
             end
         i += 1
         end
-        return finally
+        @valid_moves = finally
     end
 
     def check_check

@@ -93,7 +93,7 @@ class Game
         end
 
         proposed_board = move_piece(origin, destination, board)
-        proposed_board = proposed_board.acquire_valid_moves
+        proposed_board.acquire_valid_moves()
 
         if checkmate_check(proposed_board) == true
             proposed_board.checkmate = true
@@ -150,13 +150,13 @@ class Game
 
     def move_piece(origin, destination, board)
         new_board = board
-        this_row = origin[0]
-        this_col = origin[1]
-        piece_to_move = new_board[this_row][this_col]
-        new_row = destination[0]
-        new_col = destination[1]
-        new_board[new_row][new_col] = piece_to_move
-        new_board[this_row][this_col] = " "
+        this_row = origin[0].to_i
+        this_col = origin[1].to_i
+        piece_to_move = new_board.board[this_row][this_col]
+        new_row = destination[0].to_i
+        new_col = destination[1].to_i
+        new_board.board[new_row][new_col] = piece_to_move
+        new_board.board[this_row][this_col] = " "
 
         return new_board
     end
@@ -164,7 +164,7 @@ class Game
     def checkmate_check(board)
         board.valid_moves.each do |move|
             proposed_board = move_piece(move[0], move[1], board)
-            proposed_board = proposed_board.acquire_valid_moves
+            proposed_board.acquire_valid_moves()
             if proposed_board.black_check == false || proposed_board.white_check == false
                 return false
             end
