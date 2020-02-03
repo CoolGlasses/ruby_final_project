@@ -84,13 +84,16 @@ class Game
         return finally
     end
 
-    def valid_move_check(move, player, board)
-        piece = board[move[0]]
-        if !check_if_piece_can_move_there(piece, move[1])
+    def valid_move_check(move, player, board) ##have to convert the move coordinates to a valid 2dimensional array location i.e column a an unacceptable to methods
+        byebug
+        origin = location_converter(move[0])
+        destination = locaiton_converter(move[1])
+        piece = board.board[origin[0].to_i][origin[1].to_i]
+        if !check_if_piece_can_move_there(piece, destination)
             return false
         end
 
-        proposed_board = move_piece(move[0], move[1], board)
+        proposed_board = move_piece(origin, destination, board)
         proposed_board = proposed_board.acquire_valid_moves
 
         if checkmate_check(proposed_board) == true
@@ -106,6 +109,36 @@ class Game
             @board.check_check()
             return true
         end
+    end
+
+    def location_converter(move)
+        finally = ""
+
+        first = move[0]
+        last = move[1]
+
+        when last
+            case "a"
+                last = 1
+            case "b"
+                last = 2
+            case "c"
+                last = 3
+            case "d"
+                last = 4
+            case "e"
+                last = 5
+            case "f"
+                last = 6
+            case "g"
+                last = 7
+            case "h"
+                last = 8
+        end
+
+        finally << [first, last].join("")
+
+        return finally
     end
 
     def check_if_piece_can_move_there(piece, move)
