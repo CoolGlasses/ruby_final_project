@@ -47,7 +47,7 @@ class Bishop
         finally << valid_diagonal_right_down(board_array, this_row, this_col)
         finally << valid_diagonal_right_up(board_array, this_row, this_col)
 
-        return finally.flatten
+        @valid_moves = finally.flatten
     end
 
     def valid_diagonal_right_up(board_array, this_row, this_col)

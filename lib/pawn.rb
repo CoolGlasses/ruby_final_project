@@ -49,7 +49,7 @@ class Pawn
             finally << black_attack_left(board_array, this_row, this_col)
         end
 
-        return finally.flatten
+        @valid_moves = finally.flatten
     end
 
     def white_move_one(board_array, this_row, this_col)

@@ -84,10 +84,9 @@ class Game
         return finally
     end
 
-    def valid_move_check(move, player, board) ##have to convert the move coordinates to a valid 2dimensional array location i.e column a an unacceptable to methods
-        byebug
+    def valid_move_check(move, player, board)
         origin = location_converter(move[0])
-        destination = locaiton_converter(move[1])
+        destination = location_converter(move[1])
         piece = board.board[origin[0].to_i][origin[1].to_i]
         if !check_if_piece_can_move_there(piece, destination)
             return false
@@ -117,22 +116,22 @@ class Game
         first = move[0]
         last = move[1]
 
-        when last
-            case "a"
+        case last
+            when "a"
                 last = 1
-            case "b"
+            when "b"
                 last = 2
-            case "c"
+            when "c"
                 last = 3
-            case "d"
+            when "d"
                 last = 4
-            case "e"
+            when "e"
                 last = 5
-            case "f"
+            when "f"
                 last = 6
-            case "g"
+            when "g"
                 last = 7
-            case "h"
+            when "h"
                 last = 8
         end
 

@@ -12,6 +12,7 @@ class Board #8x8 playing surface, 9x9 if you include Row & Column Labels
         @black_set = ChessSet.new("black")
         place_pieces(@white_set.pieces)
         place_pieces(@black_set.pieces)
+        trigger_valid_moves_functions()
         @valid_moves = acquire_valid_moves()
     end
 
@@ -34,10 +35,7 @@ class Board #8x8 playing surface, 9x9 if you include Row & Column Labels
     end
 
     def trigger_valid_moves_functions
-        finally = []
-
         i = 1
-        
         while i < 9
             k = 1
             while k < 9
@@ -48,12 +46,10 @@ class Board #8x8 playing surface, 9x9 if you include Row & Column Labels
             end
             i += 1
         end
-        return finally
     end
 
 
     def acquire_valid_moves
-        trigger_valid_moves_functions()
         finally = []
 
         i = 1

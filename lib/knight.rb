@@ -50,7 +50,7 @@ class Knight
         finally << valid_short_right_down(board_array, this_row, this_col)
         finally << valid_short_right_up(board_array, this_row, this_col)
 
-        return finally.flatten
+        @valid_moves = finally.flatten
     end
 
     def valid_tall_left_up(board_array, this_row, this_col) ##What if the cell we're looking to move to is empty?  .color will return a No Method Error
