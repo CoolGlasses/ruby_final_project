@@ -47,7 +47,7 @@ class Bishop
         finally << valid_diagonal_right_down(board_array, this_row, this_col)
         finally << valid_diagonal_right_up(board_array, this_row, this_col)
 
-        return finally
+        return finally.flatten
     end
 
     def valid_diagonal_right_up(board_array, this_row, this_col)
@@ -61,12 +61,12 @@ class Bishop
                 done = true
             else
                 if board_array[next_row][next_col] == " " 
-                    finally << [next_row, next_col]
+                    finally << [next_row, next_col].join("")
                     next_row += 1
                     next_col -= 1
                 elsif @color != board_array[next_row][next_col].color
                     done = true
-                    finally << [next_row, next_col]
+                    finally << [next_row, next_col].join("")
                 else
                     done = true
                 end
@@ -87,12 +87,12 @@ class Bishop
                 done = true
             else
                 if board_array[next_row][next_col] == " " 
-                    finally << [next_row, next_col]
+                    finally << [next_row, next_col].join("")
                     next_row -= 1
                     next_col -= 1
                 elsif @color != board_array[next_row][next_col].color
                     done = true
-                    finally << [next_row, next_col]
+                    finally << [next_row, next_col].join("")
                 else
                     done = true
                 end
@@ -113,12 +113,12 @@ class Bishop
                 done = true
             else
                 if board_array[next_row][next_col] == " " 
-                    finally << [next_row, next_col]
+                    finally << [next_row, next_col].join("")
                     next_row += 1
                     next_col += 1
                 elsif @color != board_array[next_row][next_col].color
                     done = true
-                    finally << [next_row, next_col]
+                    finally << [next_row, next_col].join("")
                 else
                     done = true
                 end
@@ -139,12 +139,12 @@ class Bishop
                 done = true
             else
                 if board_array[next_row][next_col] == " " 
-                    finally << [next_row, next_col]
+                    finally << [next_row, next_col].join("")
                     next_row -= 1
                     next_col += 1
                 elsif @color != board_array[next_row][next_col].color
                     done = true
-                    finally << [next_row, next_col]
+                    finally << [next_row, next_col].join("")
                 else
                     done = true
                 end
