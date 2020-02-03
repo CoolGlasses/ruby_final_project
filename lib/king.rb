@@ -35,7 +35,7 @@ class King
         finally << valid_move_down(board_array, this_row, this_col)
         finally << valid_move_right(board_array, this_row, this_col)
 
-        return finally
+        return finally.flatten
     end
 
     def valid_move_up(board_array, this_row, this_col)
@@ -43,9 +43,9 @@ class King
 
         if next_row < 9
             if board_array[next_row][this_col] == " "
-                return [next_row, this_col]
+                return [next_row, this_col].join("")
             elsif @color != board_array[next_row][this_col].color
-                return [next_row, this_col]
+                return [next_row, this_col].join("")
             end
         end
     end
@@ -55,9 +55,9 @@ class King
 
         if next_col < 9
             if board_array[this_row][next_col] == " "
-                return [this_row, next_col]
+                return [this_row, next_col].join("")
             elsif @color != board_array[this_row][next_col].color
-                return [this_row, next_col]
+                return [this_row, next_col].join("")
             end
         end
     end
@@ -67,9 +67,9 @@ class King
 
         if next_row > 0
             if board_array[next_row][this_col] == " "
-                return [next_row, this_col]
+                return [next_row, this_col].join("")
             elsif @color != board_array[next_row][this_col].color
-                return [next_row, this_col]
+                return [next_row, this_col].join("")
             end
         end
     end
@@ -79,9 +79,9 @@ class King
 
         if next_col > 0
             if board_array[this_row][next_col] == " "
-              return [this_row, next_col]  
+              return [this_row, next_col].join("")
             elsif @color != board_array[this_row][next_col].color
-                return [this_row, next_col]
+                return [this_row, next_col].join("")
             end
         end
     end
