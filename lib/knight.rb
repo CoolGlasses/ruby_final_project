@@ -50,7 +50,7 @@ class Knight
         finally << valid_short_right_down(board_array, this_row, this_col)
         finally << valid_short_right_up(board_array, this_row, this_col)
 
-        return finally
+        return finally.flatten
     end
 
     def valid_tall_left_up(board_array, this_row, this_col) ##What if the cell we're looking to move to is empty?  .color will return a No Method Error
@@ -59,9 +59,9 @@ class Knight
 
         if next_row < 9 && next_col < 9
             if board_array[next_row][next_col] == " "
-                return [next_row, next_col]
+                return [next_row, next_col].join("")
             elsif @color != board_array[next_row][next_col].color
-                return [next_row, next_col]
+                return [next_row, next_col].join("")
             end
         end
     end
@@ -72,9 +72,9 @@ class Knight
 
         if next_row > 0 && next_col < 9
             if board_array[next_row][next_col] == " "
-                return [next_row, next_col]
+                return [next_row, next_col].join("")
             elsif @color != board_array[next_row][next_col].color
-                return [next_row, next_col]
+                return [next_row, next_col].join("")
             end
         end
     end
@@ -85,9 +85,9 @@ class Knight
 
         if next_row > 0 && next_col > 0
             if board_array[next_row][next_col] == " "
-                return [next_row, next_col]
+                return [next_row, next_col].join("")
             elsif @color != board_array[next_row][next_col].color
-                return [next_row, next_col]
+                return [next_row, next_col].join("")
             end
         end
     end
@@ -98,9 +98,9 @@ class Knight
 
         if next_row < 9 && next_col > 0
             if board_array[next_row][next_col] == " "
-                return [next_row, next_col]
+                return [next_row, next_col].join("")
             elsif @color != board_array[next_row][next_col].color
-                return [next_row, next_col]
+                return [next_row, next_col].join("")
             end
         end
     end
@@ -111,9 +111,9 @@ class Knight
 
         if next_row < 9 && next_col < 9
             if board_array[next_row][next_col] == " "
-                return [next_row, next_col]
+                return [next_row, next_col].join("")
             elsif @color != board_array[next_row][next_col].color
-                return [next_row, next_col]
+                return [next_row, next_col].join("")
             end
         end
     end
@@ -124,9 +124,9 @@ class Knight
 
         if next_row > 0 && next_col < 9
             if board_array[next_row][next_col] == " "
-                return [next_row, next_col]
+                return [next_row, next_col].join("")
             elsif @color != board_array[next_row][next_col].color
-                return [next_row, next_col]
+                return [next_row, next_col].join("")
             end
         end
     end
@@ -137,9 +137,9 @@ class Knight
 
         if next_row > 0 && next_col > 0
             if board_array[next_row][next_col] == " "
-                return [next_row, next_col]
+                return [next_row, next_col].join("")
             elsif @color != board_array[next_row][next_col].color
-                return [next_row, next_col]
+                return [next_row, next_col].join("")
             end
         end
     end
@@ -150,9 +150,9 @@ class Knight
 
         if next_row < 9 && next_col > 0 
             if board_array[next_row][next_col] == " "
-                return [next_row, next_col]
+                return [next_row, next_col].join("")
             elsif @color != board_array[next_row][next_col].color
-                return [next_row, next_col]
+                return [next_row, next_col].join("")
             end
         end
     end
