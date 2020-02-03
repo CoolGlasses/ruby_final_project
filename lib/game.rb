@@ -25,11 +25,12 @@ class Game
 
     def print_the_board(board)
         the_board = board.board
-        the_board.each do |row|
-            row.each do |space|
-                if space.is_a? String
+        the_board.each_with_index do |row, i|
+            puts
+            row.each_with_index do |space, k|
+                if space == " " || i == 0 || k == 0
                     print space
-                else 
+                else
                     print space.unicode.encode('utf-8')
                 end
             end
@@ -73,7 +74,6 @@ class Game
 
     def get_move(player) 
         player_name = player.name
-        p "#{player.name}, it's your turn.  What would you like to do?"
         p "Remember!  Type the starting coordinate first(Origin - RowColumn), then the finishing coordinate(Destination - RowColumn).  (i.e. 1b, 3c)"
         p "Origin: "
         origin = gets.chomp
@@ -85,7 +85,7 @@ class Game
     end
 
     def valid_move_check(move, player, board)
-        piece = move[0]
+        piece = board[move[0]]
         if !check_if_piece_can_move_there(piece, move[1])
             return false
         end

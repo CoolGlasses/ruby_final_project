@@ -14,15 +14,22 @@ class Player
     end
 
     def get_player_color(color) ##needs error checking
-        if color == nil
-            puts "What color would you like to be?"
-            color = gets.chomp
-        elsif color.downcase == "black"
-            color = "white"
-        else
-            color = "black"
-        end
+        valid = false
+        while !valid
+            if color == nil
+                puts "Please select a valid color.  (White -or- Black)"
+                puts "What color would you like to be?"
+                color = gets.chomp
+            elsif color.downcase == "black"
+                color = "white"
+            else
+                color = "black"
+            end
 
-        return color
+            if color.downcase == "white" || color.downcase == "black"
+                valid = true
+            end
+        end
+        return color.downcase
     end
 end
