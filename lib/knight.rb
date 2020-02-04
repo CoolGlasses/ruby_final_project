@@ -41,14 +41,24 @@ class Knight
         finally = []
         this_col = @location[1]
         this_row = @location[0]
-        finally << valid_tall_left_up(board_array, this_row, this_col)
-        finally << valid_tall_left_down(board_array, this_row, this_col)
-        finally << valid_tall_right_down(board_array, this_row, this_col)
-        finally << valid_tall_right_up(board_array, this_row, this_col)
-        finally << valid_short_left_up(board_array, this_row, this_col)
-        finally << valid_short_left_down(board_array, this_row, this_col)
-        finally << valid_short_right_down(board_array, this_row, this_col)
-        finally << valid_short_right_up(board_array, this_row, this_col)
+
+        tall_left_up = valid_tall_left_up(board_array, this_row, this_col)
+        tall_left_down = valid_tall_left_down(board_array, this_row, this_col)
+        tall_right_up = valid_tall_right_up(board_array, this_row, this_col)
+        tall_right_down = valid_tall_right_down(board_array, this_row, this_col)
+        short_left_up = valid_short_left_up(board_array, this_row, this_col)
+        short_left_down = valid_short_left_down(board_array, this_row, this_col)
+        short_right_up = valid_short_right_up(board_array, this_row, this_col)
+        short_right_down = valid_short_right_down(board_array, this_row, this_col)
+
+        finally << tall_left_up if !tall_left_up.nil?
+        finally << tall_left_down if !tall_left_down.nil?
+        finally << tall_right_up if !tall_right_up.nil?
+        finally << tall_right_down if !tall_right_down.nil?
+        finally << short_left_up if !short_left_up.nil?
+        finally << short_left_down if !short_left_down.nil?
+        finally << short_right_up if !short_right_up.nil?
+        finally << short_right_down if !short_right_down.nil?
 
         @valid_moves = finally.flatten
     end
