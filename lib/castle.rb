@@ -42,10 +42,16 @@ class Castle
         finally = []
         this_col = @location[1]
         this_row = @location[0]
-        finally << valid_horizontal_moves_right(board_array, this_row, this_col)
-        finally << valid_horizontal_moves_left(board_array, this_row, this_col)
-        finally << valid_vertical_moves_up(board_array, this_row, this_col)
-        finally << valid_vertical_moves_down(board_array, this_row, this_col)
+
+        right = valid_horizontal_moves_right(board_array, this_row, this_col)
+        left = valid_horizontal_moves_left(board_array, this_row, this_col)
+        up = valid_vertical_moves_up(board_array, this_row, this_col)
+        down = valid_vertical_moves_down(board_array, this_row, this_col)
+
+        finally << right if !right.nil?
+        finally << left if !left.nil?
+        finally << up if !up.nil?
+        finally << down if !down.nil?
         
         @valid_moves = finally.flatten
     end
