@@ -38,16 +38,21 @@ class Pawn
         this_row = @location[0]
         
         if @color == "white"
-            finally << white_move_one(board_array, this_row, this_col)
-            finally << white_move_two(board_array, this_row, this_col)
-            finally << white_attack_right(board_array, this_row, this_col)
-            finally << white_attack_left(board_array, this_row, this_col)
+            one = white_move_one(board_array, this_row, this_col)
+            two = white_move_two(board_array, this_row, this_col)
+            attack_right = white_attack_right(board_array, this_row, this_col)
+            attack_left = white_attack_left(board_array, this_row, this_col)
         else
-            finally << black_move_one(board_array, this_row, this_col)
-            finally << black_move_two(board_array, this_row, this_col)
-            finally << black_attack_right(board_array, this_row, this_col)
-            finally << black_attack_left(board_array, this_row, this_col)
+            one = black_move_one(board_array, this_row, this_col)
+            two = black_move_two(board_array, this_row, this_col)
+            attack_right = black_attack_right(board_array, this_row, this_col)
+            attack_left = black_attack_left(board_array, this_row, this_col)
         end
+
+        finally << one if !one.nil?
+        finally << two if !two.nil?
+        finally << attack_right if !attack_right.nil?
+        finally << attack_left if !attack_left.nil?
 
         @valid_moves = finally.flatten
     end
