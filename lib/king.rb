@@ -30,10 +30,15 @@ class King
         finally = []
         this_col = @location[1]
         this_row = @location[0]
-        finally << valid_move_up(board_array, this_row, this_col)
-        finally << valid_move_left(board_array, this_row, this_col)
-        finally << valid_move_down(board_array, this_row, this_col)
-        finally << valid_move_right(board_array, this_row, this_col)
+        up = valid_move_up(board_array, this_row, this_col)
+        down = valid_move_down(board_array, this_row, this_col)
+        left = valid_move_left(board_array, this_row, this_col)
+        right = valid_move_right(board_array, this_row, this_col)
+
+        finally << up if !up.nil?
+        finally << down if !down.nil?
+        finally << left if !left.nil?
+        finally << right if !right.nil?
 
         @valid_moves = finally.flatten
     end
