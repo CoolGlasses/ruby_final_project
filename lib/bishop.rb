@@ -42,10 +42,15 @@ class Bishop
         finally = []
         this_col = @location[1]
         this_row = @location[0]
-        finally << valid_diagonal_left_up(board_array, this_row, this_col)
-        finally << valid_diagonal_left_down(board_array, this_row, this_col)
-        finally << valid_diagonal_right_down(board_array, this_row, this_col)
-        finally << valid_diagonal_right_up(board_array, this_row, this_col)
+        left_up = valid_diagonal_left_up(board_array, this_row, this_col)
+        left_down = valid_diagonal_left_down(board_array, this_row, this_col)
+        right_up = valid_diagonal_right_up(board_array, this_row, this_col)
+        right_down = valid_diagonal_right_down(board_array, this_row, this_col)
+
+        finally << left_up if !left_up.nil?
+        finally << left_down if !left_down.nil? 
+        finally << right_up if !right_up.nil?
+        finally << right_down if !right_down.nil?
 
         @valid_moves = finally.flatten
     end
