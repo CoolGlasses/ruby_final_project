@@ -87,8 +87,8 @@ class Game
     def valid_move_check(move, player, board)
         origin = location_converter(move[0])
         destination = location_converter(move[1])
-        piece = board.board[origin[0].to_i][origin[1].to_i]
-        if !check_if_piece_can_move_there(piece, destination)
+        piece_location = board.board[origin[0].to_i][origin[1].to_i]
+        if !check_if_piece_can_move_there(piece_location, destination)
             return false
         end
 
