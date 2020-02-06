@@ -100,7 +100,6 @@ class Game
             return false
         end
         
-        
         if checkmate_check(proposed_board) == true
             proposed_board.checkmate = true
             @board = proposed_board
@@ -166,7 +165,7 @@ class Game
     def checkmate_check(board)
         board.valid_moves.each do |move|
             proposed_board = move_piece(move[0], move[1], board)
-            if proposed_board.player_in_check != board.player_in_check
+            if proposed_board.player_in_check != board.player_in_check || proposed_board.player_in_check == nil
                 return false
             end
         end
