@@ -58,8 +58,9 @@ class Board #8x8 playing surface, 9x9 if you include Row & Column Labels
             k = 1
             while k < 9
                 if @board[i][k] != " "
-                    @board[i][k].valid_moves.each do |move|
-                        finally << move if !move.nil?
+                    piece = @board[i][k]
+                    piece.valid_moves.each do |move|
+                        finally << [piece.location.join(""), move] if !move.nil?
                     end
                 end
             k += 1
