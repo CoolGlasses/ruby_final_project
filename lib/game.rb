@@ -157,7 +157,8 @@ class Game
         new_col = destination[1].to_i
         new_board.board[new_row][new_col] = piece_to_move
         new_board.board[this_row][this_col] = " "
-
+        new_board.check_check()
+        byebug
         return new_board
     end
 
