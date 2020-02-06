@@ -53,7 +53,6 @@ class Board #8x8 playing surface, 9x9 if you include Row & Column Labels
         finally = []
 
         i = 1
-        
         while i < 9
             k = 1
             while k < 9
@@ -71,10 +70,16 @@ class Board #8x8 playing surface, 9x9 if you include Row & Column Labels
     end
 
     def check_check
-        if white_check() == true
+        destinations = []
+
+        @valid_moves.each do |subArray|
+            destinations << subArray[1]
+        end
+
+        if white_check(destinations) == true
             @check = true
             @player_in_check = "white"
-        elsif black_check() == true
+        elsif black_check(destinations) == true
             @check = true
             @player_in_check = "black"
         else
@@ -83,10 +88,10 @@ class Board #8x8 playing surface, 9x9 if you include Row & Column Labels
         end
     end
 
-    def black_check
+    def black_check(destinations)
         black_king = @black_set.pieces[-1]
 
-        if @valid_moves.include?(black_king.location)
+        if destinations.include?(black_king.location)
             @check = true
             @player_in_check = "black"
             return true
@@ -95,10 +100,10 @@ class Board #8x8 playing surface, 9x9 if you include Row & Column Labels
         end 
     end
 
-    def white_check
+    def white_check(destinations)
         white_king = @white_set.pieces[-1]
 
-        if @valid_moves.include?(white_king.location)
+        if destinations.include?(white_king.location)
             @check = true
             @player_in_check = "white"
             return true
