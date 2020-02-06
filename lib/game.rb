@@ -87,25 +87,27 @@ class Game
     def valid_move_check(move, player, board)
         origin = location_converter(move[0])
         destination = location_converter(move[1])
-        piece_location = board.board[origin[0].to_i][origin[1].to_i]
-        if !check_if_piece_can_move_there(piece_location, destination)
+        piece = board.board[origin[0].to_i][origin[1].to_i]
+        if !check_if_piece_can_move_there(piece, destination)
             return false
         end
 
         proposed_board = move_piece(origin, destination, board)
         proposed_board.acquire_valid_moves()
 
+        if board.check == true && proposed_board.check == true && board.player_in_check == proposed_board.player_in_check
+            p "You would still be in check!"
+            return false
+        end
+        
+        
         if checkmate_check(proposed_board) == true
             proposed_board.checkmate = true
             @board = proposed_board
             @game_over = true
             return true
-        elsif board.check == true && proposed_board.check == true
-            p "Still in check!"
-            return false
         else
             @board = proposed_board
-            @board.check_check()
             return true
         end
     end
@@ -165,7 +167,6 @@ class Game
     def checkmate_check(board)
         board.valid_moves.each do |move|
             proposed_board = move_piece(move[0], move[1], board)
-            proposed_board.acquire_valid_moves()
             if proposed_board.black_check == false || proposed_board.white_check == false
                 return false
             end
