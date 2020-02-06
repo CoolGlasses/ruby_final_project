@@ -71,7 +71,7 @@ class Board #8x8 playing surface, 9x9 if you include Row & Column Labels
 
     def check_check
         destinations = []
-
+        byebug
         @valid_moves.each do |subArray|
             destinations << subArray[1]
         end

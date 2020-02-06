@@ -160,14 +160,13 @@ class Game
         new_board.board[new_row][new_col] = piece_to_move
         new_board.board[this_row][this_col] = " "
         new_board.check_check()
-        byebug
         return new_board
     end
 
     def checkmate_check(board)
         board.valid_moves.each do |move|
             proposed_board = move_piece(move[0], move[1], board)
-            if proposed_board.black_check == false || proposed_board.white_check == false
+            if proposed_board.player_in_check != board.player_in_check
                 return false
             end
         end
