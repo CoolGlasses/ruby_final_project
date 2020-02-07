@@ -53,6 +53,7 @@ class Game
             p "Okay #{player_name}, you're up!"
             move = get_move(turn)
             if valid_move_check(move, turn, @board) == false
+                byebug
                 p "That is not a valid move.  Please try again."
             elsif @game_over == false
                 if turn == @player1
@@ -157,6 +158,7 @@ class Game
         new_row = destination[0].to_i
         new_col = destination[1].to_i
         new_board.board[new_row][new_col] = piece_to_move
+        piece_to_move.location = [new_row, new_col]
         new_board.board[this_row][this_col] = " "
         new_board.check_check()
         return new_board

@@ -50,6 +50,7 @@ class Board #8x8 playing surface, 9x9 if you include Row & Column Labels
 
 
     def acquire_valid_moves
+        trigger_valid_moves_functions()
         finally = []
 
         i = 1
