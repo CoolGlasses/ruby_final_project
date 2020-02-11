@@ -95,10 +95,8 @@ class Game
 
         ###need to create a new instance of the chess board and place all of hte pieces on the new board in the same places as the exisitng board -- helper methods?
 
-        proposed_board = Board.new
-        proposed_board = place_pieces(board, proposed_board)
-        proposed_board = move_piece(origin, destination, board)
-        proposed_board.acquire_valid_moves()
+        proposed_board = temp_board(@move_history)
+        proposed_board = move_piece(origin, destination, proposed_board)
 
         if board.check == true && proposed_board.check == true && board.player_in_check == proposed_board.player_in_check
             p "You would still be in check!"
@@ -106,29 +104,23 @@ class Game
         end
 
         @move_history << [origin, destination]
-        
-        if checkmate_check(proposed_board) == true
-            proposed_board.checkmate = true
-            @board = proposed_board
+        @board = move_piece(origin, destination, @board
+
+        if checkmate_check(@move_history) == true
+            @board.checkmate = true
             @game_over = true
             return true
         else
-            @board = proposed_board
             return true
         end
     end
 
-    def place_pieces(original_board, new_board)
-        i = 1
-        while i < 9
-            k = 1
-            while k < 9
-                original_board[i][k].location = location_to_move_to
-                k += 1
-            end
-            i += 1
-        end
-                
+    def place_pieces(proposed_board, move_history)
+        move_history.each do |move_pair|
+            origin = move_pair[0]
+            destination = move_pair[1]
+            proposed_board = move_piece(origin, destination, proposed_board)
+        end     
     end
 
     def location_converter(move)
@@ -183,10 +175,18 @@ class Game
         return new_board
     end
 
-    def checkmate_check(board)
-        board.valid_moves.each do |move|
-            board_to_check = board
-            board_to_check = move_piece(move[0], move[1], board)
+    def temp_board(move_history)
+        board_to_create = Board.new
+        board_to_create = place_pieces(board_to_create, move_history)
+        board_to_create.acquire_valid_moves()
+
+        return board_to_create
+    end
+
+    def checkmate_check
+        @board.valid_moves.each do |move|
+            board_to_check = temp_board(@move_history)
+            board_to_check = move_piece(move[0], move[1], board_to_check)
             if board_to_check.player_in_check != board.player_in_check || board_to_check.player_in_check == nil
                 return false
             end
