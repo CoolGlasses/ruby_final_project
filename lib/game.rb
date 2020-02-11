@@ -104,6 +104,8 @@ class Game
             p "You would still be in check!"
             return false
         end
+
+        @move_history << [origin, destination]
         
         if checkmate_check(proposed_board) == true
             proposed_board.checkmate = true
