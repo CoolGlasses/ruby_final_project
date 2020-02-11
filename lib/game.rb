@@ -11,13 +11,14 @@ require_relative "player"
 require_relative "queen"
 
 class Game
-    attr_accessor :board
+    attr_accessor :board, :move_history
 
     def initialize
         @player1 = Player.new
         @player2 = Player.new(@player1.color)
         @board = Board.new
         @game_over = false
+        @move_history = []
     end
 
     def save
@@ -53,7 +54,6 @@ class Game
             p "Okay #{player_name}, you're up!"
             move = get_move(turn)
             if valid_move_check(move, turn, @board) == false
-                byebug
                 p "That is not a valid move.  Please try again."
             elsif @game_over == false
                 if turn == @player1
@@ -93,6 +93,10 @@ class Game
             return false
         end
 
+        ###need to create a new instance of the chess board and place all of hte pieces on the new board in the same places as the exisitng board -- helper methods?
+
+        proposed_board = Board.new
+        proposed_board = place_pieces(board, proposed_board)
         proposed_board = move_piece(origin, destination, board)
         proposed_board.acquire_valid_moves()
 
@@ -110,6 +114,19 @@ class Game
             @board = proposed_board
             return true
         end
+    end
+
+    def place_pieces(original_board, new_board)
+        i = 1
+        while i < 9
+            k = 1
+            while k < 9
+                original_board[i][k].location = location_to_move_to
+                k += 1
+            end
+            i += 1
+        end
+                
     end
 
     def location_converter(move)
@@ -166,8 +183,9 @@ class Game
 
     def checkmate_check(board)
         board.valid_moves.each do |move|
-            proposed_board = move_piece(move[0], move[1], board)
-            if proposed_board.player_in_check != board.player_in_check || proposed_board.player_in_check == nil
+            board_to_check = board
+            board_to_check = move_piece(move[0], move[1], board)
+            if board_to_check.player_in_check != board.player_in_check || board_to_check.player_in_check == nil
                 return false
             end
         end
