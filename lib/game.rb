@@ -104,9 +104,9 @@ class Game
         end
 
         @move_history << [origin, destination]
-        @board = move_piece(origin, destination, @board
+        @board = move_piece(origin, destination, @board)
 
-        if checkmate_check(@move_history) == true
+        if checkmate_check() == true
             @board.checkmate = true
             @game_over = true
             return true
@@ -115,12 +115,12 @@ class Game
         end
     end
 
-    def place_pieces(proposed_board, move_history)
-        move_history.each do |move_pair|
-            origin = move_pair[0]
-            destination = move_pair[1]
-            proposed_board = move_piece(origin, destination, proposed_board)
-        end     
+    def place_pieces(proposed_board, move_history)      
+            move_history.each do |move_pair|
+                origin = move_pair[0]
+                destination = move_pair[1]
+                proposed_board = move_piece(origin, destination, proposed_board)
+            end
     end
 
     def location_converter(move)
@@ -177,9 +177,12 @@ class Game
 
     def temp_board(move_history)
         board_to_create = Board.new
-        board_to_create = place_pieces(board_to_create, move_history)
-        board_to_create.acquire_valid_moves()
 
+        if !move_history.empty? 
+            place_pieces(board_to_create, move_history)
+            board_to_create.acquire_valid_moves()
+        end
+        
         return board_to_create
     end
 
