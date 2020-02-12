@@ -105,6 +105,7 @@ class Game
 
         @move_history << [origin, destination]
         @board = move_piece(origin, destination, @board)
+        @board.acquire_valid_moves()
 
         if checkmate_check() == true
             @board.checkmate = true
