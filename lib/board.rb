@@ -91,7 +91,7 @@ class Board #8x8 playing surface, 9x9 if you include Row & Column Labels
     def black_check(destinations)
         black_king = @black_set.pieces[-1]
 
-        if destinations.include?(black_king.location)
+        if destinations.include?(black_king.location.join(""))
             @check = true
             @player_in_check = "black"
             return true
@@ -103,7 +103,7 @@ class Board #8x8 playing surface, 9x9 if you include Row & Column Labels
     def white_check(destinations)
         white_king = @white_set.pieces[-1]
 
-        if destinations.include?(white_king.location)
+        if destinations.include?(white_king.location.join(""))
             @check = true
             @player_in_check = "white"
             return true
