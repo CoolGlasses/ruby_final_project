@@ -39,7 +39,7 @@ class Game
         end
     end
 
-    def play(@turn=nil)
+    def play
         while !@game_over
             if @turn == nil
                 if @player1.color == "white"
@@ -59,7 +59,7 @@ class Game
             @board.acquire_valid_moves()
             prune_valid_moves(@board, @turn)
 
-            move = get_move(turn)
+            move = get_move(@turn)
 
             origin = location_converter(move[0])
             destination = location_converter(move[1])
@@ -71,6 +71,7 @@ class Game
                 puts
             else
                 @board = move_piece(origin, destination, @board)
+                @move_history << [origin, destination]
             end
 
             @board.check_check()
@@ -207,19 +208,17 @@ class Game
         return board_to_create
     end
 
-    ##what if the checkmate check was a pruning of the valid moves list, and then a logic check to see if the valid moves list was empty?
-
     def prune_valid_moves(board, turn)
         finally = []
-
         board.valid_moves.each do |move|
             temp_board = temp_board(@move_history)
-            temp_board = move_piece(move[0], move[1], temp_board)
-            temp_board.check_check()
-            if temp_board.board[move[0][0], move[0][1]].color == turn.color
-                correct_color == true
+            piece_to_move = temp_board.board[move[0][0].to_i][move[0][1].to_i]
+            if piece_to_move.color == turn.color
+                temp_board = move_piece(move[0], move[1], temp_board)
+                temp_board.check_check()
+                correct_color = true
             else
-                correct_color == false
+                correct_color = false
             end
 
             if correct_color == true
@@ -236,12 +235,13 @@ class Game
 
     def checkmate_check
         if @turn == @player1
-            player_to_check == @player2
+            player_to_check = @player2
         else
-            player_to_check == @player1
+            player_to_check = @player1
         end
 
         board_to_check = temp_board(@move_history)
+        byebug
         prune_valid_moves(board_to_check, player_to_check)
 
         if board_to_check.valid_moves.empty?
