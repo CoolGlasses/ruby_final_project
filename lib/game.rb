@@ -11,7 +11,7 @@ require_relative "player"
 require_relative "queen"
 
 class Game
-    attr_accessor :board, :move_history
+    attr_accessor :board, :move_history, :turn
 
     def initialize
         @player1 = Player.new
@@ -19,6 +19,7 @@ class Game
         @board = Board.new
         @game_over = false
         @move_history = []
+        @turn = nil
     end
 
     def save
@@ -38,28 +39,28 @@ class Game
         end
     end
 
-    def play(turn=nil)
+    def play(@turn=nil)
         while !@game_over
-            if turn == nil
+            if @turn == nil
                 if @player1.color == "white"
-                    turn = @player1
+                    @turn = @player1
                 else
-                    turn = @player2
+                    @turn = @player2
                 end
             end
 
-            player_name = turn.name
+            player_name = @turn.name
             print_the_board(@board)
             puts
             p "Okay #{player_name}, you're up!"
             move = get_move(turn)
-            if valid_move_check(move, turn, @board) == false
+            if valid_move_check(move, @turn, @board) == false
                 p "That is not a valid move.  Please try again."
             elsif @game_over == false
-                if turn == @player1
-                    turn = @player2
+                if @turn == @player1
+                    @turn = @player2
                 else
-                    turn = @player1
+                    @turn = @player1
                 end
             end
 
@@ -187,15 +188,22 @@ class Game
         return board_to_create
     end
 
+    ##what if the checkmate check was a pruning of the valid moves list, and then a logic check to see if the valid moves list was empty?
+
     def prune_valid_moves(board)
         finally = []
 
         board.valid_moves.each do |move|
             temp_board = temp_board(@move_history)
             temp_board = move_piece(move[0], move[1], temp_board)
-            if temp_board.check == true ##need to know whose turn it is!!!
+            if temp_board.check == false
+                finally << move
+            elsif temp_board.player_in_check != @turn.color
+                finally << move
+            end
+        end
 
-
+        board.valid_moves = finally
     end
 
     def checkmate_check
