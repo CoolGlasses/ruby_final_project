@@ -187,6 +187,17 @@ class Game
         return board_to_create
     end
 
+    def prune_valid_moves(board)
+        finally = []
+
+        board.valid_moves.each do |move|
+            temp_board = temp_board(@move_history)
+            temp_board = move_piece(move[0], move[1], temp_board)
+            if temp_board.check == true ##need to know whose turn it is!!!
+
+
+    end
+
     def checkmate_check
         @board.valid_moves.each do |move|
             board_to_check = temp_board(@move_history)
