@@ -1,5 +1,14 @@
 require "byebug"
 require_relative "game"
+require_relative "bishop"
+require_relative "board"
+require_relative "castle"
+require_relative "chessSet"
+require_relative "king"
+require_relative "knight"
+require_relative "pawn"
+require_relative "player"
+require_relative "queen"
 
   user_game_choice = ""
 
@@ -42,8 +51,12 @@ require_relative "game"
   else
     puts
     puts "NEW GAME"
-    
-    chess.play()
+
+    player1 = Player.new
+    player2 = Player.new(player1.color)
+    board = Board.new
+    this_game_number = rand 100000
+    chess = Game.new(player1, player2, board, this_game_number)
   end
 
 

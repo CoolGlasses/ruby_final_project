@@ -14,14 +14,14 @@ class Game
     attr_accessor :board, :move_history, :turn
     attr_reader :this_game_number
 
-    def initialize
-        @player1 = Player.new
-        @player2 = Player.new(@player1.color)
-        @board = Board.new
+    def initialize(player1=nil, player2=nil, board=nil, this_game_number=nil, move_history=nil, turn=nil)
+        @player1 = player1
+        @player2 = player2
+        @board = board
         @game_over = false
-        @move_history = []
-        @turn = nil
-        @this_game_number = rand 100000
+        @move_history = move_history
+        @turn = turn
+        @this_game_number = this_game_number
     end
 
     def save
@@ -105,7 +105,6 @@ class Game
             destination = location_converter(move[1])
 
             if !@board.valid_moves.include?([origin, destination])
-            # if valid_move_check(move, @turn, @board) == false
                 puts
                 p "That is not a valid move.  Please try again."
                 puts
@@ -148,34 +147,6 @@ class Game
         finally = [origin, destination]
         return finally
     end
-
-    # def valid_move_check(move, player, board)
-    #     origin = location_converter(move[0])
-    #     destination = location_converter(move[1])
-    #     piece = board.board[origin[0].to_i][origin[1].to_i]
-    #     if !check_if_piece_can_move_there(piece, destination)
-    #         return false
-    #     end
-
-    #     proposed_board = temp_board(@move_history)
-    #     proposed_board = move_piece(origin, destination, proposed_board)
-
-    #     if board.check == true && proposed_board.check == true && board.player_in_check == proposed_board.player_in_check
-    #         p "You would still be in check!"
-    #         return false
-    #     end
-
-    #     @move_history << [origin, destination]
-    #     @board = move_piece(origin, destination, @board)
-
-    #     if checkmate_check() == true
-    #         @board.checkmate = true
-    #         @game_over = true
-    #         return true
-    #     else
-    #         return true
-    #     end
-    # end
 
     def place_pieces(proposed_board, move_history)      
             move_history.each do |move_pair|
