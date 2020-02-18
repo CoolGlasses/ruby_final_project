@@ -12,6 +12,7 @@ require_relative "queen"
 
 class Game
     attr_accessor :board, :move_history, :turn
+    attr_reader :this_game_number
 
     def initialize
         @player1 = Player.new
@@ -20,9 +21,48 @@ class Game
         @game_over = false
         @move_history = []
         @turn = nil
+        @this_game_number = rand 100000
     end
 
     def save
+        save = save_hash(@player1, @player2, @board, @move_history, @turn, @this_game_number)
+        File.open("saved_game_#{@this_game_number}.txt", "w") do |file|
+            file.write save.to_json
+        end
+    end
+
+    def save_hash(player1, player2, board, move_history, turn, this_game_number)
+        save_hash = Hash.new
+        save_hash[:player1] = player1
+        save_hash[:player2] = player2
+        save_hash[:board] = board
+        save_hash[:move_history] = move_history
+        save_hash[:turn] = turn
+        save_hash[:this_game_number] = this_game_number
+        return save_hash
+    end
+
+    def load_game(game_number)
+        load_hash = Hash.new
+
+        load_hash = JSON.parse(File.read("saved_game_#{game_number}.txt"))
+
+        load_hash.each do |k, v|
+            case k
+                when "player1"
+                    @player1 = v
+                when "player2"
+                    @player2 = v
+                when "move_history"
+                    @move_history = v
+                when "turn"
+                    @turn = v
+                when "board"
+                    @board = v
+                else
+                    puts "There was an error loading your file! Closing game!"
+            end
+        end 
     end
 
     def print_the_board(board)
@@ -79,7 +119,6 @@ class Game
             if checkmate_check() == true
                 @board.checkmate = true
                 @game_over = true
-                return true
             elsif @board.check == true
                 puts
                 puts "Check!"
@@ -94,6 +133,7 @@ class Game
                 end
             end
         end
+        
         game_over(@board)
     end
 
@@ -241,7 +281,6 @@ class Game
         end
 
         board_to_check = temp_board(@move_history)
-        byebug
         prune_valid_moves(board_to_check, player_to_check)
 
         if board_to_check.valid_moves.empty?
