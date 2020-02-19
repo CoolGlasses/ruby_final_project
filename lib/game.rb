@@ -1,5 +1,5 @@
 require "byebug"
-
+require "yaml"
 require_relative "bishop"
 require_relative "board"
 require_relative "castle"
@@ -11,10 +11,10 @@ require_relative "player"
 require_relative "queen"
 
 class Game
-    attr_accessor :board, :move_history, :turn
+    attr_accessor :board, :move_history, :turn, :player1, :player2
     attr_reader :this_game_number
 
-    def initialize(player1=nil, player2=nil, board=nil, this_game_number=nil, move_history=nil, turn=nil)
+    def initialize(player1=nil, player2=nil, board=nil, this_game_number=nil, move_history=[], turn=nil)
         @player1 = player1
         @player2 = player2
         @board = board
@@ -24,10 +24,13 @@ class Game
         @this_game_number = this_game_number
     end
 
-    def save
+    def save_game
         save = save_hash(@player1, @player2, @board, @move_history, @turn, @this_game_number)
+        # save = [@player1, @player2, @board, @move_history, @turn, @this_game_number]
         File.open("saved_game_#{@this_game_number}.txt", "w") do |file|
-            file.write save.to_json
+            # save.each do |variable_to_save|
+                file.write save.to_yaml
+            # end
         end
     end
 
@@ -44,21 +47,23 @@ class Game
 
     def load_game(game_number)
         load_hash = Hash.new
-
-        load_hash = JSON.parse(File.read("saved_game_#{game_number}.txt"))
+        load_hash = YAML::load(File.read("saved_game_#{game_number}.txt"))
+        byebug
 
         load_hash.each do |k, v|
             case k
-                when "player1"
+                when :player1
                     @player1 = v
-                when "player2"
+                when :player2
                     @player2 = v
-                when "move_history"
+                when :move_history
                     @move_history = v
-                when "turn"
+                when :turn
                     @turn = v
-                when "board"
+                when :board
                     @board = v
+                when :this_game_number
+                    @this_game_number = v
                 else
                     puts "There was an error loading your file! Closing game!"
             end
@@ -80,25 +85,27 @@ class Game
     end
 
     def play
-        while !@game_over
-            if @turn == nil
-                if @player1.color == "white"
-                    @turn = @player1
-                else
-                    @turn = @player2
-                end
+        if @turn == nil
+            if @player1.color == "white"
+                @turn = @player1
+            else
+                @turn = @player2
             end
+        end
 
-            player_name = @turn.name
-            puts
-            print_the_board(@board)
-            puts
-            p "Okay #{player_name}, you're up!"
-            puts
+        player_name = @turn.name
+        puts
+        print_the_board(@board)
+        puts
+        puts
+        puts "Okay #{player_name}, you're up!"
+        puts
 
-            @board.acquire_valid_moves()
-            prune_valid_moves(@board, @turn)
+        @board.acquire_valid_moves()
+        prune_valid_moves(@board, @turn)
 
+        valid_choice = false
+        while !valid_choice
             move = get_move(@turn)
 
             origin = location_converter(move[0])
@@ -108,32 +115,32 @@ class Game
                 puts
                 p "That is not a valid move.  Please try again."
                 puts
+                valid_choice = false
             else
+                valid_choice = true
                 @board = move_piece(origin, destination, @board)
                 @move_history << [origin, destination]
             end
+        end
 
-            @board.check_check()
+        @board.check_check()
 
-            if checkmate_check() == true
-                @board.checkmate = true
-                @game_over = true
-            elsif @board.check == true
-                puts
-                puts "Check!"
-                puts
-            end
+        if checkmate_check() == true
+            @board.checkmate = true
+            @game_over = true
+        elsif @board.check == true
+            puts
+            puts "Check!"
+            puts
+        end
 
-            if @game_over == false
-                if @turn == @player1
-                    @turn = @player2
-                else
-                    @turn = @player1
-                end
+        if @game_over == false
+            if @turn == @player1
+                @turn = @player2
+            else
+                @turn = @player1
             end
         end
-        
-        game_over(@board)
     end
 
     def get_move(player) 
@@ -261,13 +268,34 @@ class Game
         end
     end
 
-    def game_over(board)
-        if board.player_in_check == "black"
-            p "Gameover! White player wins!"
-        else
-            p "Gameover! Black player wins!"
+    def player1_wins?
+        if @game_over == true && @turn == @player1
+            puts
+            puts "%%%%%% Checkmate! %%%%%%"
+            puts
+            puts "%%%%%% #{@player1.name} wins! %%%%%%"
+            return true
         end
+    end
 
+    def player2_wins?
+        if @game_over == true && @turn == @player2
+            puts
+            puts "%%%%%% Checkmate! %%%%%%"
+            puts
+            puts "%%%%%% #{@player2.name} wins! %%%%%%"
+            return true
+        end
+    end
+
+    def game_over?
+        if player1_wins? == true || player2_wins? == true
+            puts
+            puts "Congratulations!"
+            return true
+        else
+            return false
+        end
     end
 
 end

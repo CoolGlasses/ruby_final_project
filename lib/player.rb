@@ -7,6 +7,8 @@ class Player
     end
 
     def get_player_name
+        puts
+        puts
         puts "Hello, what is your name?"
         name = gets.chomp
 
@@ -17,7 +19,10 @@ class Player
         valid = false
         while !valid
             if color == nil
+                puts
+                puts
                 puts "Please select a valid color.  (White -or- Black)"
+                puts
                 puts "What color would you like to be?"
                 color = gets.chomp
             elsif color.downcase == "black"

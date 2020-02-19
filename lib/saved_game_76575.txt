@@ -1,0 +1,1 @@
+{"player1":"#<Player:0x000055a75b96a598>","player2":"#<Player:0x000055a75b96a228>","board":"#<Board:0x000055a75b969f80>","move_history":[["25","45"],["76","66"],["14","25"],["77","57"]],"turn":"#<Player:0x000055a75b96a598>","this_game_number":76575}
