@@ -8,7 +8,6 @@ require_relative "king"
 require_relative "knight"
 require_relative "pawn"
 require_relative "player"
-require_relative "queen"
 
 class Game
     attr_accessor :board, :move_history, :turn, :player1, :player2
@@ -26,11 +25,8 @@ class Game
 
     def save_game
         save = save_hash(@player1, @player2, @board, @move_history, @turn, @this_game_number)
-        # save = [@player1, @player2, @board, @move_history, @turn, @this_game_number]
         File.open("saved_game_#{@this_game_number}.txt", "w") do |file|
-            # save.each do |variable_to_save|
                 file.write save.to_yaml
-            # end
         end
     end
 
@@ -297,5 +293,4 @@ class Game
             return false
         end
     end
-
 end

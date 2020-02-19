@@ -1,15 +1,9 @@
 require "byebug"
 require "yaml"
 require_relative "game"
-require_relative "bishop"
 require_relative "board"
-require_relative "castle"
-require_relative "chessSet"
-require_relative "king"
-require_relative "knight"
-require_relative "pawn"
 require_relative "player"
-require_relative "queen"
+
 
   user_game_choice = ""
 
