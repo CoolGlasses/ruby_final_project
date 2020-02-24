@@ -17,9 +17,13 @@ describe King do
 
     context "when setting the unicode to be displayed" do
         describe "#set_unicode_value" do
-            it "returns the correct unicode value for a White King"
+            it "returns the correct unicode value for a White King" do
+                expect(king.set_unicode_value("white")).to eq("\u2654")
+            end
 
             it "returns the correct unicode value for a Black King"
+                expect(king.set_unicode_value("black")).to eq("\u265a")
+            end
         end
     end
 
